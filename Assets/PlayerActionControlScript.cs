@@ -53,12 +53,5 @@ public class PlayerActionControlScript : BaseActionControlScript
             animator.SetBool("isBlock", true);
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.gameObject.layer == 9)
-        {
-            Debug.Log(collision.collider.gameObject.name);
-            collision.rigidbody.AddForce(collision.contacts[0].normal * 500 * -1);
-        }
-    }
+    
 }

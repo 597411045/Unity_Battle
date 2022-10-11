@@ -42,14 +42,17 @@ public class AniControlScript : MonoBehaviour
     {
         actionControlScript.SetIfMoveAble(false);
         animator.SetBool("isPunch", false);
-        actionControlScript.SetDamageBody(true);
+        //actionControlScript.SetDamageBody(true);
+        actionControlScript.isAttacker = true;
     }
 
     public void EndPunch()
     {
         actionControlScript.SetIfMoveAble(true);
-        actionControlScript.SetDamageBody(false);
+        //actionControlScript.SetDamageBody(false);
         animator.SetBool("isPunch", false);
+        actionControlScript.isAttacker = false;
+
 
     }
     public void BeginMartelo()
@@ -58,22 +61,25 @@ public class AniControlScript : MonoBehaviour
         ifChangeRotation = true;
         animator.SetBool("isMartelo", false);
         actionControlScript.SetIfMoveAble(false);
-        actionControlScript.SetDamageBody(true);
-
+        //actionControlScript.SetDamageBody(true);
+        actionControlScript.isAttacker = true;
     }
 
     public void EndMartelo()
     {
         actionControlScript.SetIfMoveAble(true);
         isSetRotationBack = true;
-        actionControlScript.SetDamageBody(false);
+        //actionControlScript.SetDamageBody(false);
         animator.SetBool("isMartelo", false);
+        actionControlScript.isAttacker = false;
+
     }
     public void BeginInjured()
     {
         actionControlScript.SetIfMoveAble(false);
         animator.SetBool("isInjured", false);
-        actionControlScript.SetDamageBody(false);
+        //actionControlScript.SetDamageBody(false);
+        actionControlScript.isAttacker = false;
 
     }
 
@@ -82,6 +88,9 @@ public class AniControlScript : MonoBehaviour
         actionControlScript.SetIfMoveAble(true);
         animator.SetBool("isInjured", false);
         isSetRotationBack = true;
+        actionControlScript.SetDamageBody(true);
+        animator.SetBool("isMartelo", false);
+        animator.SetBool("isPunch", false);
     }
 
     public void BeginBlock()

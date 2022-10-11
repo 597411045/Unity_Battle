@@ -37,7 +37,7 @@ public class AIActionControlScript : BaseActionControlScript
             {
                 animator.SetBool("isMoveBack", false);
             }
-            
+
             //if (xPosition > 0 && Mathf.Abs(xPosition) > 1.5f)
             //{
             //    _rigidbody.velocity = new Vector3(1, 0, 0);
