@@ -12,6 +12,12 @@ public class BaseActionControlScript : MonoBehaviour
     public bool isAttacker;
     Canvas UICanvas;
     Camera UICamera;
+    bool isDetecting;
+
+    public string verseColliderName;
+    public string myColliderName;
+    Vector3 firstContactPoint;
+
     protected void Init()
     {
         _rigidbody = this.GetComponent<Rigidbody>();
@@ -36,6 +42,7 @@ public class BaseActionControlScript : MonoBehaviour
 
         UICanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
         UICamera = GameObject.Find("UICamera").GetComponent<Camera>();
+        isDetecting = true;
     }
 
     public void SetIfMoveAble(bool flag)
@@ -53,20 +60,22 @@ public class BaseActionControlScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.layer == 9)
+        if (!isDetecting) return;
+        if (collision.gameObject.layer == 8)
         {
-            if (isAttacker)
-            {
-                Debug.Log(collision.gameObject.name + "+" + collision.collider.name);
-                collision.rigidbody.AddForce(collision.contacts[0].normal * -250);
-                collision.gameObject.GetComponent<BaseActionControlScript>().SetDamageBody(false);
-                collision.gameObject.GetComponent<BaseActionControlScript>().animator.SetBool("isInjured", true);
-
-                Vector3 v = Camera.main.WorldToViewportPoint(collision.contacts[0].point);
-                GameObject go = Instantiate(Resources.Load("Prefabs\\Hint"), UICamera.ViewportToWorldPoint(new Vector3(v.x, v.y, v.z)), Quaternion.identity, UICanvas.transform) as GameObject;
-                //go.transform.position = UICamera.ViewportToScreenPoint(Camera.main.WorldToViewportPoint(collision.contacts[0].point));
-                go.GetComponent<Text>().text = "HIT~~~";
-            }
+            collision.gameObject.GetComponent<BaseActionControlScript>().myColliderName = collision.collider.name;
+            verseColliderName = collision.collider.name;
+            firstContactPoint = collision.contacts[0].point;
+            isDetecting = false;
+            StartCoroutine(CorTest());
         }
     }
+
+    IEnumerator CorTest()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("123");
+    }
+
+    
 }
