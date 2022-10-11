@@ -69,6 +69,7 @@
     <Compile Include="Assets\AniControlScript.cs" />
     <Compile Include="Assets\BaseActionControlScript.cs" />
     <Compile Include="Assets\DamageBody.cs" />
+    <Compile Include="Assets\HintScript.cs" />
     <Compile Include="Assets\InjuredBody.cs" />
     <Compile Include="Assets\MyUtil.cs" />
     <Compile Include="Assets\PlayerActionControlScript.cs" />
@@ -603,6 +604,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/1102/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>D:/1102/Github/Unity_Battle/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/1102/Github/Unity_Battle/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -621,17 +625,14 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/1102/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>D:/1102/Github/Unity_Battle/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/1102/Github/Unity_Battle/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/1102/Github/Unity_Battle/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>D:/1102/Github/Unity_Battle/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>D:/1102/Github/Unity_Battle/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
