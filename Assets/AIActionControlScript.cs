@@ -6,6 +6,7 @@ public class AIActionControlScript : BaseActionControlScript
 {
     public float xPosition;
     GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class AIActionControlScript : BaseActionControlScript
     void Update()
     {
         xPosition = player.transform.position.x - this.transform.position.x;
-        if (ifMoveAble)
+        if (ifMoveAble && isOutOfGround == false)
         {
             if (xPosition < 0 && Mathf.Abs(xPosition) > 1.5f)
             {
@@ -53,10 +54,10 @@ public class AIActionControlScript : BaseActionControlScript
             animator.SetBool("isMove", false);
             animator.SetBool("isMoveBack", false);
         }
-        //if (Mathf.Abs(xPosition) > 1.1f && Mathf.Abs(xPosition) < 1.4f)
-        //{
-        //    animator.SetBool("isMartelo", true);
-        //}
+        if (Mathf.Abs(xPosition) > 1.1f && Mathf.Abs(xPosition) < 1.4f)
+        {
+            animator.SetBool("isMartelo", true);
+        }
         //if (Input.GetKeyDown(KeyCode.H))
         //{
         //    animator.SetBool("isPunch", true);

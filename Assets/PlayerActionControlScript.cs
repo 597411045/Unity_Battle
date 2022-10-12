@@ -21,14 +21,17 @@ public class PlayerActionControlScript : BaseActionControlScript
             if (Input.GetKey(KeyCode.A))
             {
                 animator.SetBool("isMoveBack", true);
+                _rigidbody.velocity = new Vector3(-1, 0, 0);
 
             }
             if (Input.GetKey(KeyCode.D))
             {
                 animator.SetBool("isMove", true);
+                _rigidbody.velocity = new Vector3(1, 0, 0);
+
             }
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
-            this.transform.rotation = Quaternion.Euler(0, 90, 0);
+            //this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
+            //this.transform.rotation = Quaternion.Euler(0, 90, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.H))

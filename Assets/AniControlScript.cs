@@ -10,7 +10,7 @@ public class AniControlScript : MonoBehaviour
     Quaternion originRotation;
     bool ifNeedChangeRotation;
     bool ifNeedResoreRotation;
-   
+
     float angle;
     GameObject Bone;
     BaseActionControlScript actionControlScript;
@@ -43,6 +43,7 @@ public class AniControlScript : MonoBehaviour
     {
         actionControlScript.isAttacker = true;
 
+
         GeneralBeginAnimation();
     }
 
@@ -58,7 +59,7 @@ public class AniControlScript : MonoBehaviour
     {
         angle = 30;
         ifNeedChangeRotation = true;
-        actionControlScript.isAttacker = true;
+        MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>().enabled = true;
 
         GeneralBeginAnimation();
     }
@@ -66,8 +67,8 @@ public class AniControlScript : MonoBehaviour
     public void EndMartelo()
     {
         ifNeedResoreRotation = true;
-        actionControlScript.isAttacker = false;
         actionControlScript.HadMadeDamageInThisRound = false;
+        MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>().End();
 
         GeneralEndAnimation("isMartelo");
 
@@ -83,7 +84,11 @@ public class AniControlScript : MonoBehaviour
     {
         ifNeedResoreRotation = true;
 
-        GeneralEndAnimation("isInjured", "isMartelo", "isPunch");
+        GeneralEndAnimation("isMartelo", "isPunch");
+        if (!actionControlScript.isOutOfGround)
+        {
+            GeneralEndAnimation("isInjured");
+        }
     }
 
     public void BeginBlock()
@@ -104,7 +109,7 @@ public class AniControlScript : MonoBehaviour
     public void EndBlockSuccess()
     {
         ifNeedResoreRotation = true;
-        GeneralEndAnimation("isBlockSuccess","isBlock");
+        GeneralEndAnimation("isBlockSuccess", "isBlock");
     }
 
     public void BeginInterrupt()
@@ -124,7 +129,7 @@ public class AniControlScript : MonoBehaviour
     private void GeneralEndAnimation(params string[] aniNames)
     {
         actionControlScript.SetIfMoveAble(true);
-        foreach(string item in aniNames)
+        foreach (string item in aniNames)
         {
             animator.SetBool(item, false);
         }
