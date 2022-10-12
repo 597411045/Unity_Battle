@@ -8,38 +8,29 @@ public class PlayerActionControlScript : BaseActionControlScript
     void Start()
     {
         base.Init();
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        animator.SetBool("isMoveBack", false);
+        animator.SetBool("isMove", false);
         if (ifMoveAble)
         {
+            
             if (Input.GetKey(KeyCode.A))
             {
-                _rigidbody.velocity = new Vector3(-1, 0, 0);
                 animator.SetBool("isMoveBack", true);
-            }
-            else
-            {
-                animator.SetBool("isMoveBack", false);
+
             }
             if (Input.GetKey(KeyCode.D))
             {
-                _rigidbody.velocity = new Vector3(1, 0, 0);
                 animator.SetBool("isMove", true);
             }
-            else
-            {
-                animator.SetBool("isMove", false);
-            }
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
+            this.transform.rotation = Quaternion.Euler(0, 90, 0);
         }
-        else
-        {
-            animator.SetBool("isMove", false);
-            animator.SetBool("isMoveBack", false);
-        }
+
         if (Input.GetKeyDown(KeyCode.H))
         {
             animator.SetBool("isPunch", true);
@@ -53,5 +44,5 @@ public class PlayerActionControlScript : BaseActionControlScript
             animator.SetBool("isBlock", true);
         }
     }
-    
+
 }

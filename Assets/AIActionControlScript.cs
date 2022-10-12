@@ -53,10 +53,10 @@ public class AIActionControlScript : BaseActionControlScript
             animator.SetBool("isMove", false);
             animator.SetBool("isMoveBack", false);
         }
-        if (Mathf.Abs(xPosition) > 1.1f && Mathf.Abs(xPosition) < 1.4f)
-        {
-            animator.SetBool("isMartelo", true);
-        }
+        //if (Mathf.Abs(xPosition) > 1.1f && Mathf.Abs(xPosition) < 1.4f)
+        //{
+        //    animator.SetBool("isMartelo", true);
+        //}
         //if (Input.GetKeyDown(KeyCode.H))
         //{
         //    animator.SetBool("isPunch", true);

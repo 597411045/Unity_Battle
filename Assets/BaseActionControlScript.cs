@@ -9,7 +9,10 @@ public class BaseActionControlScript : MonoBehaviour
     protected Animator animator;
     protected bool ifMoveAble;
     protected List<Collider> damageBodys;
+
     public bool isAttacker;
+    public bool HadMadeDamageInThisRound;
+
     Canvas UICanvas;
     Camera UICamera;
     bool isDetecting;
@@ -17,6 +20,9 @@ public class BaseActionControlScript : MonoBehaviour
     public string verseColliderName;
     public string myColliderName;
     Vector3 firstContactPoint;
+    Vector3 firstContactNormal;
+    Rigidbody verseRigidbody;
+    GameObject verse;
 
     protected void Init()
     {
@@ -65,17 +71,32 @@ public class BaseActionControlScript : MonoBehaviour
         {
             collision.gameObject.GetComponent<BaseActionControlScript>().myColliderName = collision.collider.name;
             verseColliderName = collision.collider.name;
+            firstContactNormal = collision.contacts[0].normal;
             firstContactPoint = collision.contacts[0].point;
-            isDetecting = false;
-            StartCoroutine(CorTest());
+            verseRigidbody = collision.rigidbody;
+            verse = collision.gameObject;
+            if (isAttacker && HadMadeDamageInThisRound == false)
+            {
+                isDetecting = false;
+                StartCoroutine(CorTest());
+            }
         }
     }
 
     IEnumerator CorTest()
     {
-        yield return new WaitForSeconds(0.1f);
-        Debug.Log("123");
+        yield return new WaitForSeconds(0.05f);
+        verseRigidbody.AddForce(firstContactNormal * -500);
+        verse.GetComponent<BaseActionControlScript>().animator.SetBool("isInjured", true);
+
+        Vector3 v = Camera.main.WorldToViewportPoint(firstContactPoint);
+        GameObject go = Instantiate(Resources.Load("Prefabs\\Hint"), UICamera.ViewportToWorldPoint(new Vector3(v.x, v.y, 5)), Quaternion.identity, UICanvas.transform) as GameObject;
+        Debug.Log(myColliderName + "->" + verseColliderName);
+        go.GetComponent<Text>().text = "HIT";
+        isDetecting = true;
+        HadMadeDamageInThisRound = true;
     }
 
     
+
 }

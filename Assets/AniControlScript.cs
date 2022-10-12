@@ -7,109 +7,126 @@ public class AniControlScript : MonoBehaviour
 {
     Animator animator;
     AnimatorController ac;
-    Quaternion oldRotation;
-    bool ifChangeRotation;
-    bool isSetRotationBack;
+    Quaternion originRotation;
+    bool ifNeedChangeRotation;
+    bool ifNeedResoreRotation;
+   
     float angle;
     GameObject Bone;
     BaseActionControlScript actionControlScript;
+
     // Start is called before the first frame update
     void Start()
     {
         Bone = GameObject.Find("mixamorig1:Hips");
         animator = this.GetComponent<Animator>();
-        ac = animator.runtimeAnimatorController as AnimatorController;
-        oldRotation = this.transform.rotation;
+        originRotation = this.transform.rotation;
         actionControlScript = this.GetComponentInParent<BaseActionControlScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ifChangeRotation)
+        if (ifNeedChangeRotation)
         {
             this.transform.rotation = this.transform.rotation * Quaternion.AngleAxis(angle, Vector3.up);
-            ifChangeRotation = false;
+            ifNeedChangeRotation = false;
         }
-        if (isSetRotationBack)
+        if (ifNeedResoreRotation)
         {
-            this.transform.rotation = oldRotation;
-            isSetRotationBack = false;
+            this.transform.rotation = originRotation;
+            ifNeedResoreRotation = false;
         }
     }
 
     public void BeginPunch()
     {
-        actionControlScript.SetIfMoveAble(false);
-        animator.SetBool("isPunch", false);
-        //actionControlScript.SetDamageBody(true);
         actionControlScript.isAttacker = true;
+
+        GeneralBeginAnimation();
     }
 
     public void EndPunch()
     {
-        actionControlScript.SetIfMoveAble(true);
-        //actionControlScript.SetDamageBody(false);
-        animator.SetBool("isPunch", false);
         actionControlScript.isAttacker = false;
+        actionControlScript.HadMadeDamageInThisRound = false;
 
+        GeneralEndAnimation("isPunch");
 
     }
     public void BeginMartelo()
     {
         angle = 30;
-        ifChangeRotation = true;
-        animator.SetBool("isMartelo", false);
-        actionControlScript.SetIfMoveAble(false);
-        //actionControlScript.SetDamageBody(true);
+        ifNeedChangeRotation = true;
         actionControlScript.isAttacker = true;
+
+        GeneralBeginAnimation();
     }
 
     public void EndMartelo()
     {
-        actionControlScript.SetIfMoveAble(true);
-        isSetRotationBack = true;
-        //actionControlScript.SetDamageBody(false);
-        animator.SetBool("isMartelo", false);
+        ifNeedResoreRotation = true;
         actionControlScript.isAttacker = false;
+        actionControlScript.HadMadeDamageInThisRound = false;
+
+        GeneralEndAnimation("isMartelo");
 
     }
     public void BeginInjured()
     {
-        actionControlScript.SetIfMoveAble(false);
-        animator.SetBool("isInjured", false);
-        //actionControlScript.SetDamageBody(false);
         actionControlScript.isAttacker = false;
 
+        GeneralBeginAnimation();
     }
 
     public void EndInjured()
     {
-        actionControlScript.SetIfMoveAble(true);
-        animator.SetBool("isInjured", false);
-        isSetRotationBack = true;
-        actionControlScript.SetDamageBody(true);
-        animator.SetBool("isMartelo", false);
-        animator.SetBool("isPunch", false);
+        ifNeedResoreRotation = true;
+
+        GeneralEndAnimation("isInjured", "isMartelo", "isPunch");
     }
 
     public void BeginBlock()
     {
         angle = 30;
-        ifChangeRotation = true;
-        actionControlScript.SetIfMoveAble(false);
-        animator.SetBool("isBlock", false);
+        ifNeedChangeRotation = true;
+
+        GeneralBeginAnimation();
     }
+
 
     public void EndBlock()
     {
-        actionControlScript.SetIfMoveAble(true);
+        ifNeedResoreRotation = true;
+        GeneralEndAnimation("isBlock");
     }
 
-    public void ReserRotation()
+    public void EndBlockSuccess()
     {
-        isSetRotationBack = true;
-        actionControlScript.SetIfMoveAble(true);
+        ifNeedResoreRotation = true;
+        GeneralEndAnimation("isBlockSuccess","isBlock");
+    }
 
+    public void BeginInterrupt()
+    {
+        GeneralBeginAnimation();
+    }
+    public void EndInterrupt()
+    {
+        ifNeedResoreRotation = true;
+        GeneralEndAnimation("isInterrupt");
+    }
+
+    private void GeneralBeginAnimation()
+    {
+        actionControlScript.SetIfMoveAble(false);
+    }
+    private void GeneralEndAnimation(params string[] aniNames)
+    {
+        actionControlScript.SetIfMoveAble(true);
+        foreach(string item in aniNames)
+        {
+            animator.SetBool(item, false);
+        }
     }
 }

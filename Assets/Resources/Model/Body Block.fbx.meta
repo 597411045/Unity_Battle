@@ -71,7 +71,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: ReserRotation
+        functionName: EndBlock
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a1014e32dd192454da2081eecab48d63,
           type: 3}
@@ -108,7 +108,7 @@ ModelImporter:
       curves: []
       events:
       - time: 1
-        functionName: ReserRotation
+        functionName: EndBlockSuccess
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a1014e32dd192454da2081eecab48d63,
           type: 3}
