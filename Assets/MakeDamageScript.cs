@@ -39,8 +39,11 @@ public class MakeDamageScript : MonoBehaviour
         Debug.Log(this.gameObject.name + "->" + other.gameObject.name);
         go.GetComponent<Text>().text = other.gameObject.name.Replace("mixamorig1:", "");
         other.gameObject.GetComponentInParent<Animator>().SetBool("isInjured", true);
-        other.attachedRigidbody.velocity = new Vector3(10, 10, 0);
+        other.attachedRigidbody.velocity = new Vector3(0, 0, 0);
+        other.attachedRigidbody.velocity = new Vector3(10 * this.gameObject.GetComponentInParent<BaseActionControlScript>().XAxis, 10, 0);
         other.gameObject.GetComponentInParent<BaseActionControlScript>().isOutOfGround = true;
+
+        MyUtil.FindTransformInChildren(GameObject.Find("verseHPBar").transform, "HPValue").GetComponent<Image>().fillAmount -= 0.25f;
     }
 
     public void End()

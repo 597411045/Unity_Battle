@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class BaseActionControlScript : MonoBehaviour
 {
-    protected Rigidbody _rigidbody;
+    public Rigidbody _rigidbody;
     public Animator animator;
     protected bool ifMoveAble;
     protected List<Collider> damageBodys;
+    public int XAxis;
+    public GameObject verser;
 
     public bool isAttacker;
     public bool HadMadeDamageInThisRound;
     public bool isOutOfGround;
+
+    public Image HPBar;
 
 
     protected void Init()
@@ -44,42 +48,9 @@ public class BaseActionControlScript : MonoBehaviour
         ifMoveAble = flag;
     }
 
-    public void SetDamageBody(bool flag)
+    public void UpdateXAxis()
     {
-        foreach (Collider item in damageBodys)
-        {
-            item.enabled = flag;
-        }
+        XAxis = this.transform.position.x - verser.transform.position.x > 0 ? -1 : 1;
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (!isDetecting) return;
-    //    if (collision.gameObject.layer == 8)
-    //    {
-    //        collision.gameObject.GetComponent<BaseActionControlScript>().myColliderName = collision.collider.name;
-    //        verseColliderName = collision.collider.name;
-    //        firstContactNormal = collision.contacts[0].normal;
-    //        firstContactPoint = collision.contacts[0].point;
-    //        verseRigidbody = collision.rigidbody;
-    //        verse = collision.gameObject;
-    //        if (isAttacker && HadMadeDamageInThisRound == false)
-    //        {
-    //            isDetecting = false;
-    //            StartCoroutine(CorTest());
-    //        }
-    //    }
-    //}
-
-    IEnumerator CorTest()
-    {
-        yield return new WaitForSeconds(0.05f);
-        //verseRigidbody.AddForce(firstContactNormal * -500);
-        //verse.GetComponent<BaseActionControlScript>().animator.SetBool("isInjured", true);
-
-        
-    }
-
-    
 
 }

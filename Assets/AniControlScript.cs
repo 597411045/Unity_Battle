@@ -58,6 +58,7 @@ public class AniControlScript : MonoBehaviour
     public void BeginMartelo()
     {
         angle = 30;
+        originRotation = this.transform.rotation;
         ifNeedChangeRotation = true;
         MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>().enabled = true;
 
@@ -68,7 +69,6 @@ public class AniControlScript : MonoBehaviour
     {
         ifNeedResoreRotation = true;
         actionControlScript.HadMadeDamageInThisRound = false;
-        MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>().End();
 
         GeneralEndAnimation("isMartelo");
 
@@ -84,16 +84,21 @@ public class AniControlScript : MonoBehaviour
     {
         ifNeedResoreRotation = true;
 
-        GeneralEndAnimation("isMartelo", "isPunch");
         if (!actionControlScript.isOutOfGround)
         {
-            GeneralEndAnimation("isInjured");
+            GeneralEndAnimation("isInjured", "isMartelo", "isPunch");
+        }
+        if (actionControlScript.isOutOfGround)
+        {
+            animator.SetBool("isMartelo", false);
+            animator.SetBool("isPunch", false);
         }
     }
 
     public void BeginBlock()
     {
         angle = 30;
+        originRotation = this.transform.rotation;
         ifNeedChangeRotation = true;
 
         GeneralBeginAnimation();
@@ -122,13 +127,19 @@ public class AniControlScript : MonoBehaviour
         GeneralEndAnimation("isInterrupt");
     }
 
+    public void BeginBattleStatus()
+    {
+        actionControlScript.SetIfMoveAble(true);
+        MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>().End();
+    }
+
     private void GeneralBeginAnimation()
     {
         actionControlScript.SetIfMoveAble(false);
     }
-    private void GeneralEndAnimation(params string[] aniNames)
+
+    public void GeneralEndAnimation(params string[] aniNames)
     {
-        actionControlScript.SetIfMoveAble(true);
         foreach (string item in aniNames)
         {
             animator.SetBool(item, false);

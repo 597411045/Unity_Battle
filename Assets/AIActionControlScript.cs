@@ -1,63 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AIActionControlScript : BaseActionControlScript
 {
-    public float xPosition;
-    GameObject player;
-
+    float DistanceFromVerse;
     // Start is called before the first frame update
     void Start()
     {
         base.Init();
-        player = GameObject.Find("P1");
+        verser = GameObject.Find("P1");
+        HPBar = MyUtil.FindTransformInChildren(GameObject.Find("verseHPBar").transform, "HPValue").GetComponent<Image>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        xPosition = player.transform.position.x - this.transform.position.x;
+        UpdateXAxis();
+        this.transform.eulerAngles = new Vector3(0, 90 * XAxis, 0);
+        DistanceFromVerse = Mathf.Abs(verser.transform.position.x - this.transform.position.x);
+
+        animator.SetBool("isMoveBack", false);
+        animator.SetBool("isMove", false);
         if (ifMoveAble && isOutOfGround == false)
         {
-            if (xPosition < 0 && Mathf.Abs(xPosition) > 1.5f)
-            {
-                _rigidbody.velocity = new Vector3(-1, 0, 0);
-                animator.SetBool("isMove", true);
-            }
-            else
-            {
-                animator.SetBool("isMove", false);
-            }
-            if (xPosition < 0 && Mathf.Abs(xPosition) < 1.0f)
-            {
-                _rigidbody.velocity = new Vector3(1, 0, 0);
-                animator.SetBool("isMoveBack", true);
-            }
-            else
-            {
-                animator.SetBool("isMoveBack", false);
-            }
 
-            //if (xPosition > 0 && Mathf.Abs(xPosition) > 1.5f)
-            //{
-            //    _rigidbody.velocity = new Vector3(1, 0, 0);
-            //    animator.SetBool("isMoveBack", true);
-            //}
-            //else
-            //{
-            //    animator.SetBool("isMoveBack", false);
-            //}
+            if (DistanceFromVerse > 1.5f)
+            {
+                animator.SetBool("isMove", true);
+                _rigidbody.velocity = new Vector3(1 * XAxis, 0, 0);
+
+            }
+            if (DistanceFromVerse < 1.0f)
+            {
+                animator.SetBool("isMoveBack", true);
+                _rigidbody.velocity = new Vector3(-1 * XAxis, 0, 0);
+
+            }
         }
-        else
-        {
-            animator.SetBool("isMove", false);
-            animator.SetBool("isMoveBack", false);
-        }
-        if (Mathf.Abs(xPosition) > 1.1f && Mathf.Abs(xPosition) < 1.4f)
+
+
+        if (DistanceFromVerse > 1.1f && DistanceFromVerse < 1.4f)
         {
             animator.SetBool("isMartelo", true);
         }
+
+
+
         //if (Input.GetKeyDown(KeyCode.H))
         //{
         //    animator.SetBool("isPunch", true);

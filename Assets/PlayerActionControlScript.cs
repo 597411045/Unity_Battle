@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerActionControlScript : BaseActionControlScript
 {
@@ -8,30 +9,48 @@ public class PlayerActionControlScript : BaseActionControlScript
     void Start()
     {
         base.Init();
+        verser = GameObject.Find("P2");
+        HPBar = MyUtil.FindTransformInChildren(GameObject.Find("PlayerHPBar").transform, "HPValue").GetComponent<Image>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateXAxis();
+        this.transform.eulerAngles = new Vector3(0, 90 * XAxis, 0);
+
         animator.SetBool("isMoveBack", false);
         animator.SetBool("isMove", false);
-        if (ifMoveAble)
+        if (ifMoveAble && isOutOfGround == false)
         {
-            
+
             if (Input.GetKey(KeyCode.A))
             {
-                animator.SetBool("isMoveBack", true);
+                if (XAxis > 0)
+                {
+                    animator.SetBool("isMoveBack", true);
+                }
+                else
+                {
+                    animator.SetBool("isMove", true);
+                }
                 _rigidbody.velocity = new Vector3(-1, 0, 0);
 
             }
             if (Input.GetKey(KeyCode.D))
             {
-                animator.SetBool("isMove", true);
+                if (XAxis > 0)
+                {
+                    animator.SetBool("isMove", true);
+                }
+                else
+                {
+                    animator.SetBool("isMoveBack", true);
+                }
                 _rigidbody.velocity = new Vector3(1, 0, 0);
 
             }
-            //this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
-            //this.transform.rotation = Quaternion.Euler(0, 90, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.H))
