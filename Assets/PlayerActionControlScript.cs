@@ -35,8 +35,10 @@ public class PlayerActionControlScript : BaseActionControlScript
                 {
                     animator.SetBool("isMove", true);
                 }
-                _rigidbody.velocity = new Vector3(-1, 0, 0);
-
+                if (Mathf.Abs(rigidbody.velocity.x) < 2)
+                {
+                    rigidbody.velocity += new Vector3(-2 + Mathf.Abs(rigidbody.velocity.x), 0, 0);
+                }
             }
             if (Input.GetKey(KeyCode.D))
             {
@@ -48,8 +50,14 @@ public class PlayerActionControlScript : BaseActionControlScript
                 {
                     animator.SetBool("isMoveBack", true);
                 }
-                _rigidbody.velocity = new Vector3(1, 0, 0);
-
+                if (Mathf.Abs(rigidbody.velocity.x) < 2)
+                {
+                    rigidbody.velocity += new Vector3(2 - Mathf.Abs(rigidbody.velocity.x), 0, 0);
+                }
+            }
+            if (!isOutOfGround && Input.GetKeyDown(KeyCode.Space))
+            {
+                rigidbody.velocity += new Vector3(0, 5, 0);
             }
         }
 
@@ -61,10 +69,15 @@ public class PlayerActionControlScript : BaseActionControlScript
         {
             animator.SetBool("isMartelo", true);
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKey(KeyCode.K))
         {
             animator.SetBool("isBlock", true);
         }
+        else
+        {
+            animator.SetBool("isBlock", false);
+        }
+
     }
 
 }

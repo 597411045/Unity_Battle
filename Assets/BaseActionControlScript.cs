@@ -5,24 +5,24 @@ using UnityEngine.UI;
 
 public class BaseActionControlScript : MonoBehaviour
 {
-    public Rigidbody _rigidbody;
+    public Rigidbody rigidbody;
     public Animator animator;
     protected bool ifMoveAble;
     protected List<Collider> damageBodys;
     public int XAxis;
     public GameObject verser;
 
-    public bool isAttacker;
-    public bool HadMadeDamageInThisRound;
     public bool isOutOfGround;
 
     public Image HPBar;
+    public AniControlScript aniControlScript;
 
 
     protected void Init()
     {
-        _rigidbody = this.GetComponent<Rigidbody>();
+        rigidbody = this.GetComponent<Rigidbody>();
         animator = this.GetComponentInChildren<Animator>();
+        aniControlScript = this.GetComponentInChildren<AniControlScript>();
         animator.SetBool("isBattleStatus", true);
         ifMoveAble = true;
         damageBodys = new List<Collider>();

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -666,6 +666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44066bd83c12ec41971002177f0451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultipler: 0
+  damageForce: {x: 0, y: 0, z: 0}
+  affectedObjectsCounts: 0
 --- !u!114 &357647761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1013,6 +1016,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44066bd83c12ec41971002177f0451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultipler: 0
+  damageForce: {x: 0, y: 0, z: 0}
+  affectedObjectsCounts: 0
 --- !u!65 &490878439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1058,14 +1064,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562ae9b7294609c478214a1901a94a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 0}
+  rigidbody: {fileID: 0}
   animator: {fileID: 0}
   XAxis: 0
   verser: {fileID: 0}
-  isAttacker: 0
-  HadMadeDamageInThisRound: 0
   isOutOfGround: 0
   HPBar: {fileID: 0}
+  aniControlScript: {fileID: 0}
 --- !u!136 &500346772
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1104,7 +1109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500346770}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 31.772, y: 0.52, z: 0}
+  m_LocalPosition: {x: 29.92, y: 0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 76591337}
@@ -1154,6 +1159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44066bd83c12ec41971002177f0451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultipler: 0
+  damageForce: {x: 0, y: 0, z: 0}
+  affectedObjectsCounts: 0
 --- !u!65 &524179538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1534,6 +1542,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44066bd83c12ec41971002177f0451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultipler: 0
+  damageForce: {x: 0, y: 0, z: 0}
+  affectedObjectsCounts: 0
 --- !u!114 &734303155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2036,7 +2047,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 20
-  field of view: 60
+  field of view: 20
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2061,8 +2072,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.281002, y: 1.5152364, z: -10}
+  m_LocalRotation: {x: 3.838706e-21, y: 0.0000031471252, z: -1.20808886e-26, w: 1}
+  m_LocalPosition: {x: 31.355001, y: 1.5152364, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2868,6 +2879,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44066bd83c12ec41971002177f0451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultipler: 0
+  damageForce: {x: 0, y: 0, z: 0}
+  affectedObjectsCounts: 0
 --- !u!65 &1415658847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2973,6 +2987,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44066bd83c12ec41971002177f0451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultipler: 0
+  damageForce: {x: 0, y: 0, z: 0}
+  affectedObjectsCounts: 0
 --- !u!114 &1590939196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3142,6 +3159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44066bd83c12ec41971002177f0451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultipler: 0
+  damageForce: {x: 0, y: 0, z: 0}
+  affectedObjectsCounts: 0
 --- !u!114 &1660794126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3214,7 +3234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674639207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.281002, y: 1.5152364, z: -4.6209503e-10}
+  m_LocalPosition: {x: 31.355001, y: 1.5152364, z: -4.6814996e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3311,8 +3331,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814367709}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.281002, y: 1.5152364, z: -10}
+  m_LocalRotation: {x: 3.838706e-21, y: 0.0000031471252, z: -1.20808886e-26, w: 1}
+  m_LocalPosition: {x: 31.355001, y: 1.5152364, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1161281287}
@@ -3625,19 +3645,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005785280}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2181f35360447b242973258187ec2237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 0}
+  rigidbody: {fileID: 0}
   animator: {fileID: 0}
   XAxis: 0
   verser: {fileID: 0}
-  isAttacker: 0
-  HadMadeDamageInThisRound: 0
   isOutOfGround: 0
   HPBar: {fileID: 0}
+  aniControlScript: {fileID: 0}
 --- !u!114 &2005785285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3755,6 +3774,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44066bd83c12ec41971002177f0451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultipler: 0
+  damageForce: {x: 0, y: 0, z: 0}
+  affectedObjectsCounts: 0
 --- !u!65 &2101469560
 BoxCollider:
   m_ObjectHideFlags: 0

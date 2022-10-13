@@ -8,6 +8,9 @@ public class MakeDamageScript : MonoBehaviour
     Canvas UICanvas;
     Camera UICamera;
     List<GameObject> affectedObjects;
+    public int damageMultipler;
+    public Vector3 damageForce;
+    public int affectedObjectsCounts;
 
     private void Start()
     {
@@ -15,6 +18,11 @@ public class MakeDamageScript : MonoBehaviour
         UICamera = GameObject.Find("UICamera").GetComponent<Camera>();
         affectedObjects = new List<GameObject>();
         this.enabled = false;
+    }
+
+    private void Update()
+    {
+        affectedObjectsCounts = affectedObjects.Count;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,21 +42,22 @@ public class MakeDamageScript : MonoBehaviour
         //    ) return;
         if (affectedObjects.Count > 0) return;
         affectedObjects.Add(other.gameObject);
-        Vector3 v = Camera.main.WorldToViewportPoint(this.gameObject.transform.position);
-        GameObject go = Instantiate(Resources.Load("Prefabs\\Hint"), UICamera.ViewportToWorldPoint(new Vector3(v.x, v.y, 5)), Quaternion.identity, UICanvas.transform) as GameObject;
-        Debug.Log(this.gameObject.name + "->" + other.gameObject.name);
-        go.GetComponent<Text>().text = other.gameObject.name.Replace("mixamorig1:", "");
-        other.gameObject.GetComponentInParent<Animator>().SetBool("isInjured", true);
-        other.attachedRigidbody.velocity = new Vector3(0, 0, 0);
-        other.attachedRigidbody.velocity = new Vector3(10 * this.gameObject.GetComponentInParent<BaseActionControlScript>().XAxis, 10, 0);
-        other.gameObject.GetComponentInParent<BaseActionControlScript>().isOutOfGround = true;
 
-        MyUtil.FindTransformInChildren(GameObject.Find("verseHPBar").transform, "HPValue").GetComponent<Image>().fillAmount -= 0.25f;
+        Vector3 damageForce = new Vector3(10 * this.gameObject.GetComponentInParent<BaseActionControlScript>().XAxis, 10, 0);
+        other.gameObject.GetComponent<TakeDamageScript>().takeDamage(
+            this.gameObject.transform.position,
+            this.gameObject.name,
+            damageMultipler,
+            damageForce);
+
+
+
     }
 
     public void End()
     {
-        this.enabled = false;
         affectedObjects.Clear();
+        this.enabled = false;
+        affectedObjectsCounts = affectedObjects.Count;
     }
 }

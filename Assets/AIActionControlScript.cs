@@ -24,29 +24,44 @@ public class AIActionControlScript : BaseActionControlScript
 
         animator.SetBool("isMoveBack", false);
         animator.SetBool("isMove", false);
+
+        if (DistanceFromVerse < 1.1f)
+        {
+            animator.SetBool("isPunch", true);
+        }
+        if (DistanceFromVerse > 1.1f && DistanceFromVerse < 1.4f)
+        {
+            animator.SetBool("isMartelo", true);
+        }
+
         if (ifMoveAble && isOutOfGround == false)
         {
 
             if (DistanceFromVerse > 1.5f)
             {
                 animator.SetBool("isMove", true);
-                _rigidbody.velocity = new Vector3(1 * XAxis, 0, 0);
+
+                if (Mathf.Abs(rigidbody.velocity.x) < 2)
+                {
+                    rigidbody.velocity += new Vector3((2 - Mathf.Abs(rigidbody.velocity.x)) * XAxis, 0, 0);
+                }
+                //rigidbody.velocity = new Vector3(1 * XAxis, 0, 0);
 
             }
             if (DistanceFromVerse < 1.0f)
             {
                 animator.SetBool("isMoveBack", true);
-                _rigidbody.velocity = new Vector3(-1 * XAxis, 0, 0);
+                if (Mathf.Abs(rigidbody.velocity.x) < 2)
+                {
+                    rigidbody.velocity += new Vector3((-2 + Mathf.Abs(rigidbody.velocity.x)) * XAxis, 0, 0);
+                }
+                //rigidbody.velocity = new Vector3(-1 * XAxis, 0, 0);
 
             }
         }
 
-
-        if (DistanceFromVerse > 1.1f && DistanceFromVerse < 1.4f)
-        {
-            animator.SetBool("isMartelo", true);
-        }
-
+        
+        
 
 
         //if (Input.GetKeyDown(KeyCode.H))
