@@ -18,7 +18,7 @@ public class GoundDetectScript : MonoBehaviour
         if (Physics.Raycast(this.transform.position, new Vector3(0, -1, 0), out raycastHit, 100,LayerMask.GetMask("Ground"),QueryTriggerInteraction.Ignore))
         {
             DistanceFromGround = this.transform.position.y - raycastHit.point.y;
-            if (actionControlScript.rigidbody.velocity.y <= 0 && DistanceFromGround < 0.05f)
+            if (actionControlScript._rigidbody.velocity.y <= 0 && DistanceFromGround < 0.05f)
             {
                 actionControlScript.isOutOfGround = false;
                 if (actionControlScript.animator.GetBool("isBlock"))

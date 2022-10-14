@@ -16,6 +16,7 @@ public class AniControlScript : MonoBehaviour
     GameObject Bone;
     BaseActionControlScript actionControlScript;
 
+    string[] actions;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,16 +24,28 @@ public class AniControlScript : MonoBehaviour
         animator = this.GetComponent<Animator>();
         //originRotation = this.transform.rotation;
         actionControlScript = this.GetComponentInParent<BaseActionControlScript>();
+        actions = new string[] { "isPunch", "isMartelo" };
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
         if (ifNeedChangeRotation)
         {
-            this.transform.rotation = this.transform.rotation * Quaternion.AngleAxis(angle, Vector3.up);
+            if (actionControlScript.XAxis > 0)
+            {
+                this.transform.rotation = Quaternion.Euler(0,0,0) * Quaternion.AngleAxis(angle, Vector3.up);
+            }
+            else
+            {
+                this.transform.rotation = Quaternion.Euler(0, 180, 0) * Quaternion.AngleAxis(angle, Vector3.up);
+            }
             ifNeedChangeRotation = false;
         }
+        if (animator.GetBool("isDeath")) return;
+
         if (ifNeedResoreRotation)
         {
             this.transform.rotation = this.transform.parent.rotation;
@@ -47,49 +60,47 @@ public class AniControlScript : MonoBehaviour
         makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
         makeDamageScript.enabled = true;
 
-        GeneralBeginAnimation();
+        actionControlScript.SetIfMoveAble(false);
     }
 
     public void EndPunch()
     {
-
-        GeneralEndAnimation("isPunch");
-
+        animator.SetBool("isPunch", false);
     }
     public void BeginMartelo()
     {
-        angle = 30;
+        angle = 120;
         ifNeedChangeRotation = true;
         makeDamageScript = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>();
         makeDamageScript.damageMultipler = 2;
         makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
         makeDamageScript.enabled = true;
 
-        GeneralBeginAnimation();
+        actionControlScript.SetIfMoveAble(false);
     }
 
     public void EndMartelo()
     {
         ifNeedResoreRotation = true;
-        GeneralEndAnimation("isMartelo");
+        animator.SetBool("isMartelo", false);
     }
 
     public void BeginFireBall()
     {
-        angle = 30;
+        angle = 120;
         ifNeedChangeRotation = true;
         //makeDamageScript = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>();
         //makeDamageScript.damageMultipler = 2;
         //makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
         //makeDamageScript.enabled = true;
 
-        GeneralBeginAnimation();
+        actionControlScript.SetIfMoveAble(false);
+
     }
 
     public void EndFireBall()
     {
         ifNeedResoreRotation = true;
-        GeneralEndAnimation("isFireBall");
     }
     public void BeginInjured()
     {
@@ -98,19 +109,18 @@ public class AniControlScript : MonoBehaviour
             makeDamageScript.End();
             makeDamageScript = null;
         }
-        GeneralBeginAnimation();
+        actionControlScript.SetIfMoveAble(false);
+
     }
 
     public void EndInjured()
     {
         ifNeedResoreRotation = true;
-
-        GeneralEndAnimation("isInjured", "isMartelo", "isPunch");
+        animator.SetBool("isInjured", false);
     }
 
     public void BeginBlock()
     {
-
     }
 
     public void EndBlock()
@@ -120,17 +130,23 @@ public class AniControlScript : MonoBehaviour
     public void EndBlockSuccess()
     {
         ifNeedResoreRotation = true;
-        GeneralEndAnimation("isBlockSuccess", "isBlock");
     }
 
     public void BeginInterrupt()
     {
-        GeneralBeginAnimation();
+
     }
     public void EndInterrupt()
     {
         ifNeedResoreRotation = true;
-        GeneralEndAnimation("isInterrupt");
+    }
+
+    public void BeginDeath()
+    {
+        angle = 120;
+        ifNeedChangeRotation = true;
+        actionControlScript.SetIfMoveAble(false);
+        EndAllAction();
     }
 
     public void BeginBattleStatus()
@@ -143,14 +159,11 @@ public class AniControlScript : MonoBehaviour
         }
     }
 
-    private void GeneralBeginAnimation()
-    {
-        actionControlScript.SetIfMoveAble(false);
-    }
 
-    public void GeneralEndAnimation(params string[] aniNames)
+
+    public void EndAllAction()
     {
-        foreach (string item in aniNames)
+        foreach (string item in actions)
         {
             animator.SetBool(item, false);
         }

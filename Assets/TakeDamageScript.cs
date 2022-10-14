@@ -44,7 +44,7 @@ public class TakeDamageScript : MonoBehaviour
 
 
 
-        if (animator.GetBool("isBlock"))
+        if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Block")
         {
             totalDamage = bodyDamage * damageMultipler / 2;
             DebugText = this.gameObject.name + "格挡了来自于【" + HiterName + "】的伤害:" + totalDamage;
@@ -60,7 +60,7 @@ public class TakeDamageScript : MonoBehaviour
             DebugText = this.gameObject.name + "受到了来自于【" + HiterName + "】的伤害:" + totalDamage;
             UIText = "受伤部位：" + this.gameObject.name.Replace("mixamorig1:", "")
                 + "伤害值：" + totalDamage;
-            animator.SetBool("isInjured", true);
+            animator.SetTrigger("isInjured");
             actionControlScript.SetIfMoveAble(false);
             rigidbody.velocity = damageForce * totalDamage * 0.1f;
             actionControlScript.HPBar.fillAmount -= totalDamage / 100f;
@@ -68,6 +68,10 @@ public class TakeDamageScript : MonoBehaviour
         Debug.Log(DebugText);
         go.GetComponent<Text>().text = UIText;
         actionControlScript.HPText.text = (actionControlScript.HPBar.fillAmount * 100).ToString();
+        if (actionControlScript.HPBar.fillAmount <= 0)
+        {
+            animator.SetBool("isDeath", true);
+        }
 
 
     }

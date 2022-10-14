@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BaseActionControlScript : MonoBehaviour
 {
-    public Rigidbody rigidbody;
+    public Rigidbody _rigidbody;
     public Animator animator;
     //obsolete
     //protected List<Collider> damageBodys;
@@ -19,15 +19,17 @@ public class BaseActionControlScript : MonoBehaviour
     public Image HPBar;
     public Text HPText;
 
-
-
-    protected void Init()
+    protected void InitAwake()
     {
-        rigidbody = this.GetComponent<Rigidbody>();
+        ifMoveAble = true;
+    }
+
+    protected void InitStart()
+    {
+        _rigidbody = this.GetComponent<Rigidbody>();
         animator = this.GetComponentInChildren<Animator>();
         aniControlScript = this.GetComponentInChildren<AniControlScript>();
         animator.SetBool("isBattleStatus", true);
-        ifMoveAble = true;
 
         //obsolete
         //damageBodys = new List<Collider>();
