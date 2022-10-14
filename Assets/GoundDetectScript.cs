@@ -21,6 +21,10 @@ public class GoundDetectScript : MonoBehaviour
             if (actionControlScript.rigidbody.velocity.y <= 0 && DistanceFromGround < 0.05f)
             {
                 actionControlScript.isOutOfGround = false;
+                if (actionControlScript.animator.GetBool("isBlock"))
+                {
+                    actionControlScript.SetIfMoveAble(true);
+                }
             }
             if (DistanceFromGround > 0.05f)
             {

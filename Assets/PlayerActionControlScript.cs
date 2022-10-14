@@ -5,13 +5,20 @@ using UnityEngine.UI;
 
 public class PlayerActionControlScript : BaseActionControlScript
 {
+    public List<KeyCode> keyCodes;
+    bool isNeedClearKey;
+    Text KeyCodeBar;
+
     // Start is called before the first frame update
     void Start()
     {
         base.Init();
         verser = GameObject.Find("P2");
         HPBar = MyUtil.FindTransformInChildren(GameObject.Find("PlayerHPBar").transform, "HPValue").GetComponent<Image>();
-
+        KeyCodeBar = GameObject.Find("KeyCodeBar").GetComponentInChildren<Text>();
+        HPText = GameObject.Find("PlayerHPBar").GetComponentInChildren<Text>();
+        List<KeyCode> keyCodes = new List<KeyCode>();
+        isNeedClearKey = true;
     }
 
     // Update is called once per frame
@@ -22,6 +29,7 @@ public class PlayerActionControlScript : BaseActionControlScript
 
         animator.SetBool("isMoveBack", false);
         animator.SetBool("isMove", false);
+
         if (ifMoveAble && isOutOfGround == false)
         {
 
@@ -59,6 +67,14 @@ public class PlayerActionControlScript : BaseActionControlScript
             {
                 rigidbody.velocity += new Vector3(0, 5, 0);
             }
+            if (Input.GetKey(KeyCode.K))
+            {
+                animator.SetBool("isBlock", true);
+            }
+            else
+            {
+                animator.SetBool("isBlock", false);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.H))
@@ -69,15 +85,38 @@ public class PlayerActionControlScript : BaseActionControlScript
         {
             animator.SetBool("isMartelo", true);
         }
-        if (Input.GetKey(KeyCode.K))
-        {
-            animator.SetBool("isBlock", true);
-        }
-        else
-        {
-            animator.SetBool("isBlock", false);
-        }
 
+        KeyDetect();
+    }
+
+    void KeyDetect()
+    {
+        if (Input.GetKeyDown(KeyCode.A)) keyCodes.Add(KeyCode.A);
+        if (Input.GetKeyDown(KeyCode.S)) keyCodes.Add(KeyCode.S);
+        if (Input.GetKeyDown(KeyCode.D)) keyCodes.Add(KeyCode.D);
+        if (Input.GetKeyDown(KeyCode.H)) keyCodes.Add(KeyCode.H);
+        if (Input.GetKeyDown(KeyCode.J)) keyCodes.Add(KeyCode.J);
+        KeyCodeBar.text = "";
+        foreach (KeyCode item in keyCodes)
+        {
+            if(item== KeyCode.A) KeyCodeBar.text += "←";
+            if(item== KeyCode.S) KeyCodeBar.text += "↓";
+            if(item== KeyCode.D) KeyCodeBar.text += "→";
+            if(item== KeyCode.H) KeyCodeBar.text += "A";
+            if(item== KeyCode.J) KeyCodeBar.text += "B";
+        }
+        if (isNeedClearKey)
+        {
+            StartCoroutine(DeleteFirstKeyCode());
+            isNeedClearKey = false;
+        }
+    }
+
+    IEnumerator DeleteFirstKeyCode()
+    {
+        yield return new WaitForSeconds(1);
+        keyCodes.RemoveAt(0);
+        isNeedClearKey = true;
     }
 
 }

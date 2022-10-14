@@ -71,9 +71,25 @@ public class AniControlScript : MonoBehaviour
     public void EndMartelo()
     {
         ifNeedResoreRotation = true;
-
         GeneralEndAnimation("isMartelo");
+    }
 
+    public void BeginFireBall()
+    {
+        angle = 30;
+        ifNeedChangeRotation = true;
+        //makeDamageScript = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>();
+        //makeDamageScript.damageMultipler = 2;
+        //makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
+        //makeDamageScript.enabled = true;
+
+        GeneralBeginAnimation();
+    }
+
+    public void EndFireBall()
+    {
+        ifNeedResoreRotation = true;
+        GeneralEndAnimation("isFireBall");
     }
     public void BeginInjured()
     {
@@ -94,12 +110,11 @@ public class AniControlScript : MonoBehaviour
 
     public void BeginBlock()
     {
-        GeneralBeginAnimation();
+
     }
 
     public void EndBlock()
     {
-
     }
 
     public void EndBlockSuccess()

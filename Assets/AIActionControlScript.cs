@@ -12,6 +12,7 @@ public class AIActionControlScript : BaseActionControlScript
         base.Init();
         verser = GameObject.Find("P1");
         HPBar = MyUtil.FindTransformInChildren(GameObject.Find("verseHPBar").transform, "HPValue").GetComponent<Image>();
+        HPText = GameObject.Find("verseHPBar").GetComponentInChildren<Text>();
 
     }
 
@@ -28,8 +29,9 @@ public class AIActionControlScript : BaseActionControlScript
         if (DistanceFromVerse < 1.1f)
         {
             animator.SetBool("isPunch", true);
+
         }
-        if (DistanceFromVerse > 1.1f && DistanceFromVerse < 1.4f)
+        if (DistanceFromVerse > 1.1f && DistanceFromVerse < 1.2f)
         {
             animator.SetBool("isMartelo", true);
         }
@@ -56,12 +58,19 @@ public class AIActionControlScript : BaseActionControlScript
                     rigidbody.velocity += new Vector3((-2 + Mathf.Abs(rigidbody.velocity.x)) * XAxis, 0, 0);
                 }
                 //rigidbody.velocity = new Vector3(-1 * XAxis, 0, 0);
-
+            }
+            if (animator.GetBool("isPunch") || animator.GetBool("isMartelo"))
+            {
+                animator.SetBool("isBlock", false);
+            }
+            else
+            {
+                animator.SetBool("isBlock", true);
             }
         }
 
-        
-        
+
+
 
 
         //if (Input.GetKeyDown(KeyCode.H))

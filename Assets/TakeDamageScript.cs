@@ -8,9 +8,12 @@ public class TakeDamageScript : MonoBehaviour
     Canvas UICanvas;
     Camera UICamera;
     int bodyDamage;
+    int totalDamage;
     Animator animator;
     Rigidbody rigidbody;
     BaseActionControlScript actionControlScript;
+    string DebugText;
+    string UIText;
 
 
     private void Start()
@@ -28,6 +31,7 @@ public class TakeDamageScript : MonoBehaviour
         Vector3 v = Camera.main.WorldToViewportPoint(HiterPosition);
         GameObject go = Instantiate(Resources.Load("Prefabs\\Hint"), UICamera.ViewportToWorldPoint(new Vector3(v.x, v.y, 5)), Quaternion.identity, UICanvas.transform) as GameObject;
 
+
         bodyDamage = 2;
         if (this.gameObject.name.Contains("Head"))
         {
@@ -37,15 +41,34 @@ public class TakeDamageScript : MonoBehaviour
         {
             bodyDamage = 5;
         }
-        Debug.Log(this.gameObject.name + "受到了来自于【" + HiterName + "】的伤害:" + bodyDamage * damageMultipler);
 
-        go.GetComponent<Text>().text = "受伤部位：" + this.gameObject.name.Replace("mixamorig1:", "")
-            + "伤害值：" + bodyDamage * damageMultipler;
 
-        animator.SetBool("isInjured", true);
-        actionControlScript.SetIfMoveAble(false);
-        rigidbody.velocity = damageForce * bodyDamage * damageMultipler * 0.1f;
-        this.GetComponentInParent<BaseActionControlScript>().HPBar.fillAmount -= 0.1f;
+
+        if (animator.GetBool("isBlock"))
+        {
+            totalDamage = bodyDamage * damageMultipler / 2;
+            DebugText = this.gameObject.name + "格挡了来自于【" + HiterName + "】的伤害:" + totalDamage;
+            UIText = "格挡部位：" + this.gameObject.name.Replace("mixamorig1:", "")
+                + "伤害值：" + totalDamage;
+            actionControlScript.SetIfMoveAble(false);
+            rigidbody.velocity = damageForce * totalDamage * 0.1f;
+            actionControlScript.HPBar.fillAmount -= totalDamage / 100f;
+        }
+        else
+        {
+            totalDamage = bodyDamage * damageMultipler;
+            DebugText = this.gameObject.name + "受到了来自于【" + HiterName + "】的伤害:" + totalDamage;
+            UIText = "受伤部位：" + this.gameObject.name.Replace("mixamorig1:", "")
+                + "伤害值：" + totalDamage;
+            animator.SetBool("isInjured", true);
+            actionControlScript.SetIfMoveAble(false);
+            rigidbody.velocity = damageForce * totalDamage * 0.1f;
+            actionControlScript.HPBar.fillAmount -= totalDamage / 100f;
+        }
+        Debug.Log(DebugText);
+        go.GetComponent<Text>().text = UIText;
+        actionControlScript.HPText.text = (actionControlScript.HPBar.fillAmount * 100).ToString();
+
 
     }
 }
