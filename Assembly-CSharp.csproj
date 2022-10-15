@@ -73,6 +73,21 @@
     <Compile Include="Assets\MyUtil.cs" />
     <Compile Include="Assets\PlayerActionControlScript.cs" />
     <Compile Include="Assets\TakeDamageScript.cs" />
+    <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
+    <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon.shader" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_attribute.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_vertex.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_uv.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_lighting_mtoon.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_forward_vertex.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_forward_fragment.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_alpha.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_input.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_lighting_unity.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_utility.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_normal.hlsl" />
+    <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_define.hlsl" />
     <Reference Include="UnityEngine">
       <HintPath>E:/Unity/Editor/2019.4.21/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -255,6 +270,9 @@
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>E:/Unity/Editor/2019.4.21/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>E:/Github/Unity_Battle/Library/PackageCache/com.unity.burst@1.1.1/Unity.Burst.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>E:/Unity/Editor/2019.4.21/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -633,6 +651,24 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Animation.Rigging.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Animation.Rigging.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>

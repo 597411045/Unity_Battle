@@ -36,7 +36,7 @@ public class AniControlScript : MonoBehaviour
         {
             if (actionControlScript.XAxis > 0)
             {
-                this.transform.rotation = Quaternion.Euler(0,0,0) * Quaternion.AngleAxis(angle, Vector3.up);
+                this.transform.rotation = Quaternion.Euler(0, 0, 0) * Quaternion.AngleAxis(angle, Vector3.up);
             }
             else
             {
@@ -56,10 +56,12 @@ public class AniControlScript : MonoBehaviour
     public void BeginPunch()
     {
         makeDamageScript = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftHand").GetComponent<MakeDamageScript>();
-        makeDamageScript.damageMultipler = 1;
-        makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
-        makeDamageScript.enabled = true;
-
+        if (makeDamageScript != null)
+        {
+            makeDamageScript.damageMultipler = 1;
+            makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
+            makeDamageScript.enabled = true;
+        }
         actionControlScript.SetIfMoveAble(false);
     }
 
