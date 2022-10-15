@@ -88,8 +88,8 @@ Material:
     - _AlphaToMask: 1
     - _BlendMode: 1
     - _BumpScale: 1
-    - _CullMode: 2
-    - _Cutoff: 0.21
+    - _CullMode: 0
+    - _Cutoff: 0.059
     - _DebugMode: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0

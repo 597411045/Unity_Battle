@@ -11,6 +11,7 @@ public class AniControlScript : MonoBehaviour
     bool ifNeedChangeRotation;
     bool ifNeedResoreRotation;
     MakeDamageScript makeDamageScript;
+    Transform makeDamageTr;
 
     float angle;
     GameObject Bone;
@@ -55,14 +56,27 @@ public class AniControlScript : MonoBehaviour
 
     public void BeginPunch()
     {
-        makeDamageScript = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftHand").GetComponent<MakeDamageScript>();
-        if (makeDamageScript != null)
+        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftHand");
+        if (makeDamageTr != null)
         {
+            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
             makeDamageScript.damageMultipler = 1;
             makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
             makeDamageScript.enabled = true;
+            actionControlScript.SetIfMoveAble(false);
+            return;
         }
-        actionControlScript.SetIfMoveAble(false);
+
+        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "J_Bip_L_Hand");
+        if (makeDamageTr != null)
+        {
+            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+            makeDamageScript.damageMultipler = 1;
+            makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
+            makeDamageScript.enabled = true;
+            actionControlScript.SetIfMoveAble(false);
+            return;
+        }
     }
 
     public void EndPunch()
@@ -73,12 +87,27 @@ public class AniControlScript : MonoBehaviour
     {
         angle = 120;
         ifNeedChangeRotation = true;
-        makeDamageScript = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>();
-        makeDamageScript.damageMultipler = 2;
-        makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
-        makeDamageScript.enabled = true;
+        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftHand");
+        if (makeDamageTr != null)
+        {
+            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+            makeDamageScript.damageMultipler = 2;
+            makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
+            makeDamageScript.enabled = true;
+            actionControlScript.SetIfMoveAble(false);
+            return;
+        }
 
-        actionControlScript.SetIfMoveAble(false);
+        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "J_Bip_L_ToeBase");
+        if (makeDamageTr != null)
+        {
+            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+            makeDamageScript.damageMultipler = 2;
+            makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
+            makeDamageScript.enabled = true;
+            actionControlScript.SetIfMoveAble(false);
+            return;
+        }
     }
 
     public void EndMartelo()

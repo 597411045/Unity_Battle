@@ -65,6 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AIActionControlScript.cs" />
+    <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBone.cs" />
+    <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBoneCollider.cs" />
+    <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBoneColliderBase.cs" />
+    <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
     <Compile Include="Assets\AniControlScript.cs" />
     <Compile Include="Assets\BaseActionControlScript.cs" />
     <Compile Include="Assets\GoundDetectScript.cs" />
@@ -87,6 +91,7 @@
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_lighting_unity.hlsl" />
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_utility.hlsl" />
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_normal.hlsl" />
+    <None Include="Assets\AddsOn\DynamicBone\ReadMe.txt" />
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_define.hlsl" />
     <Reference Include="UnityEngine">
       <HintPath>E:/Unity/Editor/2019.4.21/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -625,11 +630,20 @@
     <Reference Include="Cinemachine">
       <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Animation.Rigging.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -643,32 +657,23 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Editor">
-      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Animation.Rigging">
-      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Animation.Rigging.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Animation.Rigging.Editor">
       <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Animation.Rigging.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>E:/Github/Unity_Battle/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
