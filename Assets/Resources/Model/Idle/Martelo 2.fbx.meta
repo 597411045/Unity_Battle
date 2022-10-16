@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: Martelo
+  - first:
+      74: -7469512761532233610
+    second: MarteloShow
   externalObjects: {}
   materials:
     materialImportMode: 1

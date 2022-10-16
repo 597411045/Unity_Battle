@@ -64,19 +64,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AIActionControlScript.cs" />
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBone.cs" />
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBoneCollider.cs" />
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBoneColliderBase.cs" />
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
-    <Compile Include="Assets\AniControlScript.cs" />
-    <Compile Include="Assets\BaseActionControlScript.cs" />
-    <Compile Include="Assets\GoundDetectScript.cs" />
-    <Compile Include="Assets\HintScript.cs" />
-    <Compile Include="Assets\MakeDamageScript.cs" />
     <Compile Include="Assets\MyUtil.cs" />
-    <Compile Include="Assets\PlayerActionControlScript.cs" />
-    <Compile Include="Assets\TakeDamageScript.cs" />
+    <Compile Include="Assets\Scene0Asset\LoginButtonScript.cs" />
+    <Compile Include="Assets\Scene0Asset\LoginSceneScript.cs" />
+    <Compile Include="Assets\Scene0Asset\RegisterButtonScript.cs" />
+    <Compile Include="Assets\Scene1Asset\ChooseButtonScript.cs" />
+    <Compile Include="Assets\Scene1Asset\ChooseCharacterScript.cs" />
+    <Compile Include="Assets\Scene1Asset\StartButtonScript.cs" />
+    <Compile Include="Assets\Scene2Asset\AIActionControlScript.cs" />
+    <Compile Include="Assets\Scene2Asset\AniControlScript.cs" />
+    <Compile Include="Assets\Scene2Asset\BaseActionControlScript.cs" />
+    <Compile Include="Assets\Scene2Asset\GoundDetectScript.cs" />
+    <Compile Include="Assets\Scene2Asset\HintScript.cs" />
+    <Compile Include="Assets\Scene2Asset\MakeDamageScript.cs" />
+    <Compile Include="Assets\Scene2Asset\PlayerActionControlScript.cs" />
+    <Compile Include="Assets\Scene2Asset\TakeDamageScript.cs" />
+    <Compile Include="Assets\SingleTon.cs" />
     <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon.shader" />
@@ -90,6 +97,7 @@
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_input.hlsl" />
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_lighting_unity.hlsl" />
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_utility.hlsl" />
+    <None Include="Assets\AddsOn\Mysql\MySql.Data.xml" />
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_normal.hlsl" />
     <None Include="Assets\AddsOn\DynamicBone\ReadMe.txt" />
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_define.hlsl" />
@@ -275,6 +283,36 @@
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>E:/Unity/Editor/2019.4.21/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="ZstdNet">
+      <HintPath>E:/Github/Unity_Battle/Assets/AddsOn/Mysql/ZstdNet.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Unsafe">
       <HintPath>E:/Github/Unity_Battle/Library/PackageCache/com.unity.burst@1.1.1/Unity.Burst.Unsafe.dll</HintPath>
