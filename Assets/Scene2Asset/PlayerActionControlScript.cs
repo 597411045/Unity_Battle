@@ -18,10 +18,10 @@ public class PlayerActionControlScript : BaseActionControlScript
         isNeedClearKey = true;
         keyCodes = new StringBuilder();
         StyleDic = new Dictionary<string, string>();
-        StyleDic.Add("isFireBall", "SDH");
+        StyleDic.Add("is_SDH", "SDH");
         StyleDic.Add("isCTPunch", "SASDH");
-        StyleDic.Add("isPunch", "H");
-        StyleDic.Add("isMartelo", "J");
+        StyleDic.Add("is_H", "H");
+        StyleDic.Add("is_J", "J");
     }
     // Start is called before the first frame update
     void Start()
@@ -86,7 +86,7 @@ public class PlayerActionControlScript : BaseActionControlScript
                 if (Input.GetKey(KeyCode.K))
                 {
                     animator.SetBool("isBlock", true);
-                    aniControlScript.EndAllAction();
+                    baseAniControl.EndAllAction();
                 }
                 else
                 {

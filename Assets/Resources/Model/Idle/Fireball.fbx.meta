@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: FireBall
+    second: Hand_SDH
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: FireBall
+      name: Hand_SDH
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
@@ -60,15 +60,15 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: BeginFireBall
+        functionName: Begin_SDH
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a1014e32dd192454da2081eecab48d63,
           type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 1
-        functionName: EndFireBall
+      - time: 0.9976608
+        functionName: End_SDH
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a1014e32dd192454da2081eecab48d63,
           type: 3}

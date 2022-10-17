@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Martelo
+    second: Hand_J
   - first:
       74: -7469512761532233610
     second: MarteloShow
@@ -38,7 +38,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Martelo
+      name: Hand_J
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
@@ -63,7 +63,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: BeginMartelo
+        functionName: Begin_J
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a1014e32dd192454da2081eecab48d63,
           type: 3}
@@ -71,7 +71,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: EndMartelo
+        functionName: End_J
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a1014e32dd192454da2081eecab48d63,
           type: 3}

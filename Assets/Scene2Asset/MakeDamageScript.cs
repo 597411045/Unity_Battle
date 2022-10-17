@@ -25,9 +25,10 @@ public class MakeDamageScript : MonoBehaviour
         affectedObjectsCounts = affectedObjects.Count;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (this.enabled == false) return;
+        if (affectedObjects.Count > 0) return;
         if (other.gameObject.layer != 9) return;
         if (other.gameObject.GetComponent<TakeDamageScript>() == null) return;
         //if (
@@ -40,8 +41,8 @@ public class MakeDamageScript : MonoBehaviour
         //        }
         //        )
         //    ) return;
-        if (affectedObjects.Count > 0) return;
         affectedObjects.Add(other.gameObject);
+        Debug.Log("Hit");
 
         Vector3 damageForce = new Vector3(10 * this.gameObject.GetComponentInParent<BaseActionControlScript>().XAxis, 10, 0);
         other.gameObject.GetComponent<TakeDamageScript>().takeDamage(
@@ -49,7 +50,6 @@ public class MakeDamageScript : MonoBehaviour
             this.gameObject.name,
             damageMultipler,
             damageForce);
-
 
 
     }

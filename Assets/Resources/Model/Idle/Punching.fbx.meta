@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Punching
+    second: Hand_H
   - first:
       74: -1352948451597433708
     second: BattleStatus
@@ -38,7 +38,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Punching
+      name: Hand_H
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
@@ -63,7 +63,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: BeginPunch
+        functionName: Begin_H
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a1014e32dd192454da2081eecab48d63,
           type: 3}
@@ -71,7 +71,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: EndPunch
+        functionName: End_H
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a1014e32dd192454da2081eecab48d63,
           type: 3}

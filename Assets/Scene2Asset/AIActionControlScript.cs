@@ -60,7 +60,7 @@ public class AIActionControlScript : BaseActionControlScript
                 //    _rigidbody.velocity += new Vector3(0, 5, 0);
                 //}
                 animator.SetBool("isBlock", true);
-                aniControlScript.EndAllAction();
+                baseAniControl.EndAllAction();
                 //{
                 //    animator.SetBool("isBlock", false);
                 //}
@@ -73,13 +73,13 @@ public class AIActionControlScript : BaseActionControlScript
         if (DistanceFromVerse < 1.0f)
         {
             animator.SetBool("isBlock", false);
-            animator.SetTrigger("isPunch");
+            animator.SetTrigger("is_H");
             return true;
         }
         if (DistanceFromVerse > 1.0f && DistanceFromVerse < 1.5f)
         {
             animator.SetBool("isBlock", false);
-            animator.SetTrigger("isMartelo");
+            animator.SetTrigger("is_J");
             return true;
         }
         return false;

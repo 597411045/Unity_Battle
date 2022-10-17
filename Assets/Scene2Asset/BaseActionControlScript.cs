@@ -10,11 +10,11 @@ public class BaseActionControlScript : MonoBehaviour
     //obsolete
     //protected List<Collider> damageBodys;
     public GameObject verser;
-    public AniControlScript aniControlScript;
+    public BaseAniControlScript baseAniControl;
 
     public int XAxis;
     public bool isOutOfGround;
-    protected bool ifMoveAble;
+    public bool ifMoveAble;
 
     public Image HPBar;
     public Text HPText;
@@ -28,7 +28,7 @@ public class BaseActionControlScript : MonoBehaviour
     {
         _rigidbody = this.GetComponent<Rigidbody>();
         animator = this.GetComponentInChildren<Animator>();
-        aniControlScript = this.GetComponentInChildren<AniControlScript>();
+        baseAniControl = this.GetComponentInChildren<BaseAniControlScript>();
         animator.SetBool("isBattleStatus", true);
 
         //obsolete
@@ -57,7 +57,14 @@ public class BaseActionControlScript : MonoBehaviour
 
     public void UpdateXAxis()
     {
-        XAxis = this.transform.position.x - verser.transform.position.x > 0 ? -1 : 1;
+        if (verser != null)
+        {
+            XAxis = this.transform.position.x - verser.transform.position.x > 0 ? -1 : 1;
+        }
+        else
+        {
+            XAxis = 1;
+        }
     }
 
 }
