@@ -27,7 +27,7 @@ public class PlayerActionControlScript : BaseActionControlScript
     void Start()
     {
         base.InitStart();
-        verser = GameObject.Find("P2");
+        verser = GameObject.Find("Enemy");
         HPBar = MyUtil.FindTransformInChildren(GameObject.Find("PlayerHPBar").transform, "HPValue").GetComponent<Image>();
         KeyCodeBar = GameObject.Find("KeyCodeBar").GetComponentInChildren<Text>();
         HPText = GameObject.Find("PlayerHPBar").GetComponentInChildren<Text>();

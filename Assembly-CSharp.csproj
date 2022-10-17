@@ -68,7 +68,6 @@
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBoneCollider.cs" />
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBoneColliderBase.cs" />
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
-    <Compile Include="Assets\BattleStageScript.cs" />
     <Compile Include="Assets\GameData.cs" />
     <Compile Include="Assets\MyUtil.cs" />
     <Compile Include="Assets\Scene0Asset\LoginButtonScript.cs" />
@@ -76,12 +75,14 @@
     <Compile Include="Assets\Scene0Asset\RegisterButtonScript.cs" />
     <Compile Include="Assets\Scene1Asset\ChooseButtonScript.cs" />
     <Compile Include="Assets\Scene1Asset\ChooseCharacterScript.cs" />
+    <Compile Include="Assets\Scene1Asset\ItemDragScript.cs" />
     <Compile Include="Assets\Scene1Asset\StartButtonScript.cs" />
     <Compile Include="Assets\Scene2Asset\AIActionControlScript.cs" />
     <Compile Include="Assets\Scene2Asset\AniControlHandScript.cs" />
     <Compile Include="Assets\Scene2Asset\AniControlSwordScript.cs" />
     <Compile Include="Assets\Scene2Asset\BaseActionControlScript.cs" />
     <Compile Include="Assets\Scene2Asset\BaseAniControlScript .cs" />
+    <Compile Include="Assets\Scene2Asset\BattleStageScript.cs" />
     <Compile Include="Assets\Scene2Asset\GoundDetectScript.cs" />
     <Compile Include="Assets\Scene2Asset\HintScript.cs" />
     <Compile Include="Assets\Scene2Asset\MakeDamageScript.cs" />

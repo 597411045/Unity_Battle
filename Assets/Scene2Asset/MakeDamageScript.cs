@@ -1,32 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MakeDamageScript : MonoBehaviour
 {
-    Canvas UICanvas;
-    Camera UICamera;
+    bool isActive;
     List<GameObject> affectedObjects;
     public int damageMultipler;
     public Vector3 damageForce;
     public int affectedObjectsCounts;
 
+    private void Awake()
+    {
+        if (SceneManager.GetActiveScene().name == "ChooseCharacter") return;
+        isActive = true;
+        
+    }
+
     private void Start()
     {
-        UICanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
-        UICamera = GameObject.Find("UICamera").GetComponent<Camera>();
+        if (!isActive) return;
         affectedObjects = new List<GameObject>();
         this.enabled = false;
     }
 
     private void Update()
     {
+        if (!isActive) return;
+
         affectedObjectsCounts = affectedObjects.Count;
     }
 
     private void OnTriggerStay(Collider other)
     {
+        if (!isActive) return;
+
         if (this.enabled == false) return;
         if (affectedObjects.Count > 0) return;
         if (other.gameObject.layer != 9) return;
@@ -56,6 +66,8 @@ public class MakeDamageScript : MonoBehaviour
 
     public void End()
     {
+        if (!isActive) return;
+
         affectedObjects.Clear();
         this.enabled = false;
         affectedObjectsCounts = affectedObjects.Count;

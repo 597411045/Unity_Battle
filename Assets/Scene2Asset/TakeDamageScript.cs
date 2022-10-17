@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TakeDamageScript : MonoBehaviour
 {
+    bool isActive;
     Canvas UICanvas;
     Camera UICamera;
     int bodyDamage;
@@ -15,9 +17,15 @@ public class TakeDamageScript : MonoBehaviour
     string DebugText;
     string UIText;
 
+    private void Awake()
+    {
+        if (SceneManager.GetActiveScene().name == "ChooseCharacter") return;
+        isActive = true;
+    }
 
     private void Start()
     {
+        if (!isActive) return;
         UICanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
         UICamera = GameObject.Find("UICamera").GetComponent<Camera>();
         animator = this.GetComponentInParent<Animator>();
@@ -28,6 +36,7 @@ public class TakeDamageScript : MonoBehaviour
 
     public void takeDamage(Vector3 HiterPosition, string HiterName, int damageMultipler, Vector3 damageForce)
     {
+        if (!isActive) return;
         Vector3 v = Camera.main.WorldToViewportPoint(HiterPosition);
         GameObject go = Instantiate(Resources.Load("Prefabs\\Hint"), UICamera.ViewportToWorldPoint(new Vector3(v.x, v.y, 5)), Quaternion.identity, UICanvas.transform) as GameObject;
 

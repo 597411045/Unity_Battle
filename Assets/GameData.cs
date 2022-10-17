@@ -11,4 +11,5 @@ public class GameData : ScriptableObject
     public string CharacterName;
     public int FootDamageMultipler;
     public int HandDamageMultipler;
+    public string WeaponType;
 }

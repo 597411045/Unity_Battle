@@ -15,3 +15,4 @@ MonoBehaviour:
   CharacterName: C1
   FootDamageMultipler: 4
   HandDamageMultipler: 2
+  WeaponType: Sword

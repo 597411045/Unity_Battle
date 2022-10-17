@@ -57,14 +57,7 @@ public class BaseActionControlScript : MonoBehaviour
 
     public void UpdateXAxis()
     {
-        if (verser != null)
-        {
-            XAxis = this.transform.position.x - verser.transform.position.x > 0 ? -1 : 1;
-        }
-        else
-        {
-            XAxis = 1;
-        }
+        XAxis = this.transform.position.x - verser.transform.position.x > 0 ? -1 : 1;
     }
 
 }

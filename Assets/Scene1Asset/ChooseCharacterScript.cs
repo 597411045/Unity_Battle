@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class ChooseCharacterScript : SingleTon<ChooseCharacterScript>
 {
-    public GameObject C1;
-    public GameObject C2;
+    public GameObject Character;
+    GameObject CharacterBox;
+
     public Image C1_Button;
     public Image C2_Button;
     public string CharacterName;
@@ -19,10 +20,7 @@ public class ChooseCharacterScript : SingleTon<ChooseCharacterScript>
 
     void Start()
     {
-        C1 = GameObject.Find("C1");
-        C2 = GameObject.Find("C2");
-        C2.SetActive(false);
-
+        CharacterBox = GameObject.Find("Box");
         C1_Button = GameObject.Find("C1_Button").GetComponent<Image>();
         C2_Button = GameObject.Find("C2_Button").GetComponent<Image>();
         C1_On();
@@ -30,19 +28,24 @@ public class ChooseCharacterScript : SingleTon<ChooseCharacterScript>
 
     public void C1_On()
     {
+        if (Character != null) Destroy(Character);
         C1_Button.color = Color.blue;
         C2_Button.color = Color.white;
-        C1.SetActive(true);
-        C2.SetActive(false);
+        Character = Instantiate(Resources.Load<GameObject>("Prefabs/C1"), CharacterBox.transform.position, Quaternion.Euler(0, 180, 0), CharacterBox.transform);
+        Character.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC/C1_Show");
+        
+        MyUtil.FindTransformInChildren(Character.transform, "Sword").gameObject.SetActive(false);
         CharacterName = "C1";
     }
 
     public void C2_On()
     {
+        if (Character != null) Destroy(Character);
         C1_Button.color = Color.white;
         C2_Button.color = Color.blue;
-        C1.SetActive(false);
-        C2.SetActive(true);
+        Character = Instantiate(Resources.Load<GameObject>("Prefabs/C2"), CharacterBox.transform.position, Quaternion.Euler(0, 180, 0), CharacterBox.transform);
+        Character.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC/C2_Show");
+        MyUtil.FindTransformInChildren(Character.transform, "Sword").gameObject.SetActive(false);
         CharacterName = "C2";
     }
 
