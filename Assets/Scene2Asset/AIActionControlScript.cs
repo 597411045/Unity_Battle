@@ -15,7 +15,7 @@ public class AIActionControlScript : BaseActionControlScript
     void Start()
     {
         base.InitStart();
-        verser = GameObject.Find("P1");
+        verser = GameObject.Find(BattleStageScript.instance.gameData.CharacterName);
         HPBar = MyUtil.FindTransformInChildren(GameObject.Find("verseHPBar").transform, "HPValue").GetComponent<Image>();
         HPText = GameObject.Find("verseHPBar").GetComponentInChildren<Text>();
     }

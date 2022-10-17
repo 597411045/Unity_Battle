@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -18,7 +19,8 @@ public class AniControlScript : MonoBehaviour
     BaseActionControlScript actionControlScript;
 
     string[] actions;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         Bone = GameObject.Find("mixamorig1:Hips");
@@ -26,6 +28,7 @@ public class AniControlScript : MonoBehaviour
         //originRotation = this.transform.rotation;
         actionControlScript = this.GetComponentInParent<BaseActionControlScript>();
         actions = new string[] { "isPunch", "isMartelo" };
+
     }
 
     // Update is called once per frame
@@ -71,7 +74,7 @@ public class AniControlScript : MonoBehaviour
         if (makeDamageTr != null)
         {
             makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = 1;
+            makeDamageScript.damageMultipler = BattleStageScript.instance.gameData.HandDamageMultipler;
             makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
             makeDamageScript.enabled = true;
             actionControlScript.SetIfMoveAble(false);
@@ -102,7 +105,7 @@ public class AniControlScript : MonoBehaviour
         if (makeDamageTr != null)
         {
             makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = 2;
+            makeDamageScript.damageMultipler = BattleStageScript.instance.gameData.FootDamageMultipler;
             makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
             makeDamageScript.enabled = true;
             actionControlScript.SetIfMoveAble(false);

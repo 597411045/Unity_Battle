@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class ChooseButtonScript : MonoBehaviour,IPointerClickHandler
 {
-   
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (this.gameObject.name.Contains("C1"))

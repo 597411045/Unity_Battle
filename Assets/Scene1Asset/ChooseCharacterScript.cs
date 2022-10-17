@@ -10,6 +10,7 @@ public class ChooseCharacterScript : SingleTon<ChooseCharacterScript>
     public GameObject C2;
     public Image C1_Button;
     public Image C2_Button;
+    public string CharacterName;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class ChooseCharacterScript : SingleTon<ChooseCharacterScript>
         C2_Button.color = Color.white;
         C1.SetActive(true);
         C2.SetActive(false);
+        CharacterName = "C1";
     }
 
     public void C2_On()
@@ -41,6 +43,7 @@ public class ChooseCharacterScript : SingleTon<ChooseCharacterScript>
         C2_Button.color = Color.blue;
         C1.SetActive(false);
         C2.SetActive(true);
+        CharacterName = "C2";
     }
 
     public void ChangeScene()
