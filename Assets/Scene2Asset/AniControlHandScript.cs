@@ -35,7 +35,7 @@ public class AniControlHandScript : BaseAniControlScript
         if (makeDamageTr != null)
         {
             makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = BattleStageScript.instance.gameData.HandDamageMultipler;
+            makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.HandDamageMultipler;
             makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
             makeDamageScript.enabled = true;
             actionControlScript.SetIfMoveAble(false);
@@ -66,7 +66,7 @@ public class AniControlHandScript : BaseAniControlScript
         if (makeDamageTr != null)
         {
             makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = BattleStageScript.instance.gameData.FootDamageMultipler;
+            makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.FootDamageMultipler;
             makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
             makeDamageScript.enabled = true;
             actionControlScript.SetIfMoveAble(false);

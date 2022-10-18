@@ -167,14 +167,12 @@ public class BaseAniControlScript : MonoBehaviour
         ifNeedChangeRotation = true;
         actionControlScript.SetIfMoveAble(false);
         EndAllAction();
+        BS_SGM_Script.instance.EndDuel();
     }
 
     public void EndDeath()
     {
-        angle = 120;
-        ifNeedChangeRotation = true;
-        actionControlScript.SetIfMoveAble(false);
-        EndAllAction();
+        
     }
 
     public virtual void BeginBattleStatus()

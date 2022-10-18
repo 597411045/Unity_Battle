@@ -67,7 +67,7 @@ public class AniControlSwordScript : BaseAniControlScript
 
     public override void Begin_SDH()
     {
-        angle = 120;
+        angle = 135;
         ifNeedChangeRotation = true;
         //makeDamageScript = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase").GetComponent<MakeDamageScript>();
         //makeDamageScript.damageMultipler = 2;

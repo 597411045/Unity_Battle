@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52cc4e342d86e44caad21bfe07974ad, type: 3}
   m_Name: gameData
   m_EditorClassIdentifier: 
-  CharacterName: C1
-  FootDamageMultipler: 4
-  HandDamageMultipler: 2
+  CharacterName: C2
+  FootDamageMultipler: 5
+  HandDamageMultipler: 10
   WeaponType: Sword

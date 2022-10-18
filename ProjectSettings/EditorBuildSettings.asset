@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/ChooseCharacter.unity
     guid: 8b4ba9d66ad51af4e901215ffb04ede0
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/BattleState.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

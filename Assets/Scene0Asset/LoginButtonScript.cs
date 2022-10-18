@@ -51,7 +51,7 @@ public class LoginButtonScript : MonoBehaviour, IPointerClickHandler
                     resultField.text = "登录成功，即将跳转";
                     this.gameObject.GetComponent<Image>().raycastTarget = false;
                     this.gameObject.GetComponent<Image>().color = Color.green;
-                    LoginSceneScript.instance.ChangeScene();
+                    LOGIN_SGM_Script.instance.ChangeScene();
 
                 }
                 else

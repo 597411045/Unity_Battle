@@ -60,7 +60,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: Begin__SDH
+        functionName: Begin_SDH
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 619970b5f2266404d989b988c453209a,
           type: 3}
