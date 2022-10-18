@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BS_SGM_Script : SingleTon<BS_SGM_Script>
@@ -24,11 +26,14 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
     GameObject tmpGO;
     bool ifTimerOn;
 
+    CinemachineTargetGroup cinemachineTargetGroup;
+
     private void Awake()
     {
         base.InitInstance(this);
         gameData = AssetDatabase.LoadAssetAtPath<GameData>("Assets/GameData/gameData.asset");
         InfoBar = GameObject.Find("InfoBar");
+        cinemachineTargetGroup = GameObject.Find("TargetGroup1").GetComponent<CinemachineTargetGroup>();
 
         PlayerHPBar = MyUtil.FindTransformInChildren(GameObject.Find("PlayerHPBar").transform, "HPValue").GetComponent<Image>();
         RobotHPBar = MyUtil.FindTransformInChildren(GameObject.Find("verseHPBar").transform, "HPValue").GetComponent<Image>();
@@ -39,7 +44,6 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
 
         InfoBar.SetActive(false);
         ifTimerOn = true;
-
     }
 
     private void Update()
@@ -71,7 +75,7 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
         RobotPosition.AddComponent<AIActionControlScript>();
         RobotPosition.AddComponent<GoundDetectScript>();
 
-
+        cinemachineTargetGroup.AddMember(MyUtil.FindTransformInChildren(RobotPosition.transform, "mixamorig1:Hips"), 1, 0.3f);
     }
 
     private void BuildPlayer()
@@ -94,6 +98,11 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
         PlayerPosition.AddComponent<PlayerActionControlScript>();
         PlayerPosition.AddComponent<GoundDetectScript>();
 
+        if (gameData.CharacterName == "C1")
+            cinemachineTargetGroup.AddMember(MyUtil.FindTransformInChildren(PlayerPosition.transform, "J_Bip_C_Hips"), 1, 0.3f);
+        if (gameData.CharacterName == "C2")
+            cinemachineTargetGroup.AddMember(MyUtil.FindTransformInChildren(PlayerPosition.transform, "mixamorig1:Hips"), 1, 0.3f);
+
     }
 
     public void EndDuel()
@@ -104,12 +113,31 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
         if (PlayerHPBar.fillAmount > 0)
         {
             InfoBar.GetComponentInChildren<Text>().text = "YOU WIN";
+            StartCoroutine(CR_ChangeSceneWhenWin());
         }
         else
         {
             InfoBar.GetComponentInChildren<Text>().text = "YOU LOSE";
+            RobotAnimator.SetBool("isVectory", true);
+            PlayerPosition.GetComponentInChildren<BaseActionControlScript>().enabled = false;
+            StartCoroutine(CR_ChangeSceneWhenLose());
         }
-        PlayerPosition.GetComponentInChildren<BaseActionControlScript>().enabled = false;
         RobotPosition.GetComponentInChildren<BaseActionControlScript>().enabled = false;
+    }
+
+    IEnumerator CR_ChangeSceneWhenWin()
+    {
+        yield return new WaitForSeconds(5);
+        PlayerAnimator.SetBool("isVectory", true);
+        PlayerPosition.GetComponentInChildren<BaseActionControlScript>().enabled = false;
+
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("ScoreBoard");
+    }
+
+    IEnumerator CR_ChangeSceneWhenLose()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("ScoreBoard");
     }
 }

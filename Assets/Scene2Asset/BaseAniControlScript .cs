@@ -27,7 +27,7 @@ public class BaseAniControlScript : MonoBehaviour
         animator = this.GetComponent<Animator>();
         //originRotation = this.transform.rotation;
         actionControlScript = this.GetComponentInParent<BaseActionControlScript>();
-        actions = new string[] { "is_H", "is_J","isInjured" };
+        actions = new string[] { "is_H", "is_J", "isInjured" };
     }
 
     public void BaseUpdate()
@@ -45,6 +45,7 @@ public class BaseAniControlScript : MonoBehaviour
             ifNeedChangeRotation = false;
         }
         if (animator.GetBool("isDeath")) return;
+        if (animator.GetBool("isVectory")) return;
 
         if (ifNeedResoreRotation)
         {
@@ -167,12 +168,25 @@ public class BaseAniControlScript : MonoBehaviour
         ifNeedChangeRotation = true;
         actionControlScript.SetIfMoveAble(false);
         EndAllAction();
-        BS_SGM_Script.instance.EndDuel();
+
     }
 
     public void EndDeath()
     {
-        
+        BS_SGM_Script.instance.EndDuel();
+    }
+
+    public void BeginVectory()
+    {
+        angle = actionControlScript.XAxis > 0 ? 180 : 0;
+        ifNeedChangeRotation = true;
+        actionControlScript.SetIfMoveAble(false);
+        EndAllAction();
+
+    }
+
+    public void EndVectory()
+    {
     }
 
     public virtual void BeginBattleStatus()
