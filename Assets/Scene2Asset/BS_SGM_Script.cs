@@ -1,6 +1,8 @@
 ﻿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,7 +33,16 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
     private void Awake()
     {
         base.InitInstance(this);
-        gameData = AssetDatabase.LoadAssetAtPath<GameData>("Assets/GameData/gameData.asset");
+        string path = "D:\\1102\\Github\\GameData\\gameData";
+        gameData = new GameData();
+
+        gameData.CharacterName = CC_SGM_Script.instance.CharacterName;
+        gameData.WeaponType = CC_SGM_Script.instance.WeaponType;
+
+        FileStream fs = File.Open(path, FileMode.Open);
+        BinaryFormatter bf = new BinaryFormatter();
+        gameData = bf.Deserialize(fs) as GameData;
+        fs.Close();
         InfoBar = GameObject.Find("InfoBar");
         cinemachineTargetGroup = GameObject.Find("TargetGroup1").GetComponent<CinemachineTargetGroup>();
 

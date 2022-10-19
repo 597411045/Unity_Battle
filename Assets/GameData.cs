@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-public class GameData : ScriptableObject
+public class GameData
 {
     public string CharacterName;
     public int FootDamageMultipler;

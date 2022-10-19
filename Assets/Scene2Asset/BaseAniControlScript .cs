@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class BaseAniControlScript : MonoBehaviour
 {
     public Animator animator;
-    public AnimatorController ac;
     //Quaternion originRotation;
     public bool ifNeedChangeRotation;
     public bool ifNeedResoreRotation;
