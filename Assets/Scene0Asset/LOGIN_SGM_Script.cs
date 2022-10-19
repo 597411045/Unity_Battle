@@ -19,6 +19,6 @@ public class LOGIN_SGM_Script : SingleTon<LOGIN_SGM_Script>
     IEnumerator CR_ChangeScene()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("ChooseCharacter");
+        SceneManager.LoadScene(1);
     }
 }

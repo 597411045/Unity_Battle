@@ -22,8 +22,8 @@ public class FunctionButtonInSBScript : MonoBehaviour, IPointerClickHandler
             string path = "D:\\1102\\Github\\GameData\\gameData";
             GameData gameData = new GameData();
 
-            gameData.CharacterName = CC_SGM_Script.instance.CharacterName;
-            gameData.WeaponType = CC_SGM_Script.instance.WeaponType;
+            //gameData.CharacterName = PB_SGM_Script.instance.CharacterName;
+            //gameData.WeaponType = PB_SGM_Script.instance.WeaponType;
             if (gameData.WeaponType.Contains("Hand"))
             {
                 gameData.HandDamageMultipler = 1;
@@ -40,7 +40,7 @@ public class FunctionButtonInSBScript : MonoBehaviour, IPointerClickHandler
             bf.Serialize(fs, gameData);
             fs.Close();
 
-            CC_SGM_Script.instance.ChangeScene();
+            PB_SGM_Script.instance.ChangeScene();
         }
     }
 

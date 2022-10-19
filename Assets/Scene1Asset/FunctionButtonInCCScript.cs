@@ -13,26 +13,31 @@ public class FunctionButtonInCCScript : MonoBehaviour, IPointerClickHandler
     {
         if (this.gameObject.name.Contains("C1"))
         {
-            CC_SGM_Script.instance.C1_On();
+            PB_SGM_Script.instance.C1_On();
             return;
         }
         if (this.gameObject.name.Contains("C2"))
         {
-            CC_SGM_Script.instance.C2_On();
+            PB_SGM_Script.instance.C2_On();
             return;
         }
         if (this.gameObject.name.Contains("Bag_Button"))
         {
-            CC_SGM_Script.instance.Bag_Switch();
+            PB_SGM_Script.instance.Equip_Switch();
+            return;
+        }
+        if (this.gameObject.name.Contains("Store_Button"))
+        {
+            PB_SGM_Script.instance.Store_Switch();
             return;
         }
         if (this.gameObject.name.Contains("Start_Button"))
         {
-            string path = "D:\\1102\\Github\\GameData\\gameData";
+            string path = Application.dataPath+"/Resources/gameData";
             GameData gameData = new GameData();
 
-            gameData.CharacterName = CC_SGM_Script.instance.CharacterName;
-            gameData.WeaponType = CC_SGM_Script.instance.WeaponType;
+            //gameData.CharacterName = PB_SGM_Script.instance.CharacterName;
+            //gameData.WeaponType = PB_SGM_Script.instance.WeaponType;
             if (gameData.WeaponType.Contains("Hand"))
             {
                 gameData.HandDamageMultipler = 1;
@@ -49,7 +54,7 @@ public class FunctionButtonInCCScript : MonoBehaviour, IPointerClickHandler
             bf.Serialize(fs, gameData);
             fs.Close();
 
-            CC_SGM_Script.instance.ChangeScene();
+            PB_SGM_Script.instance.ChangeScene();
         }
     }
 

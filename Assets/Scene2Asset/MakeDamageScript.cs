@@ -14,9 +14,9 @@ public class MakeDamageScript : MonoBehaviour
 
     private void Awake()
     {
-        if (SceneManager.GetActiveScene().name == "ChooseCharacter") return;
+        if (SceneManager.GetActiveScene().buildIndex == 1) return;
         isActive = true;
-        
+
     }
 
     private void Start()

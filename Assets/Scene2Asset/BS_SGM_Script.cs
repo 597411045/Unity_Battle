@@ -33,11 +33,11 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
     private void Awake()
     {
         base.InitInstance(this);
-        string path = "D:\\1102\\Github\\GameData\\gameData";
+        string path = Application.dataPath + "/Resources/gameData";
         gameData = new GameData();
 
-        gameData.CharacterName = CC_SGM_Script.instance.CharacterName;
-        gameData.WeaponType = CC_SGM_Script.instance.WeaponType;
+        //gameData.CharacterName = PB_SGM_Script.instance.CharacterName;
+        //gameData.WeaponType = PB_SGM_Script.instance.WeaponType;
 
         FileStream fs = File.Open(path, FileMode.Open);
         BinaryFormatter bf = new BinaryFormatter();
@@ -143,12 +143,12 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
         PlayerPosition.GetComponentInChildren<BaseActionControlScript>().enabled = false;
 
         yield return new WaitForSeconds(5);
-        SceneManager.LoadScene("ScoreBoard");
+        SceneManager.LoadScene(3);
     }
 
     IEnumerator CR_ChangeSceneWhenLose()
     {
         yield return new WaitForSeconds(5);
-        SceneManager.LoadScene("ScoreBoard");
+        SceneManager.LoadScene(3);
     }
 }

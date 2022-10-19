@@ -92,6 +92,6 @@ public class SB_SGM_Script : SingleTon<SB_SGM_Script>
     IEnumerator CR_ChangeScene()
     {
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("BattleState");
+        SceneManager.LoadScene(2);
     }
 }
