@@ -66,7 +66,7 @@
     <Compile Include="Assets\Scene0Asset\LoginButtonScript.cs" />
     <Compile Include="Assets\Scene0Asset\RegisterButtonScript.cs" />
     <Compile Include="Assets\Scene1Asset\CC_SGM_Script.cs" />
-    <Compile Include="Assets\Scene1Asset\FunctionButtonScript.cs" />
+    <Compile Include="Assets\Scene1Asset\FunctionButtonInCCScript.cs" />
     <Compile Include="Assets\Scene1Asset\ItemDragScript.cs" />
     <Compile Include="Assets\Scene2Asset\AIActionControlScript.cs" />
     <Compile Include="Assets\Scene2Asset\AniControlHandScript.cs" />
@@ -79,6 +79,8 @@
     <Compile Include="Assets\Scene2Asset\MakeDamageScript.cs" />
     <Compile Include="Assets\Scene2Asset\PlayerActionControlScript.cs" />
     <Compile Include="Assets\Scene2Asset\TakeDamageScript.cs" />
+    <Compile Include="Assets\Scene3Asset\FunctionButtonInSBScript.cs" />
+    <Compile Include="Assets\Scene3Asset\SB_SGM_Script.cs" />
     <Compile Include="Assets\SingleTon.cs" />
     <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
