@@ -19,26 +19,45 @@ public class AniControlHandScript : BaseAniControlScript
 
     public override void Begin_H()
     {
-        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftHand");
-        if (makeDamageTr != null)
+        if (animator.gameObject.transform.parent.gameObject.name == "CharacterBox")
         {
-            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = 1;
-            makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
-            makeDamageScript.enabled = true;
-            actionControlScript.SetIfMoveAble(false);
-            return;
+
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftHand");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.ATK_H;
+                makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
+                makeDamageScript.enabled = true;
+                actionControlScript.SetIfMoveAble(false);
+                return;
+            }
+
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "J_Bip_L_Hand");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.ATK_H;
+                makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
+                makeDamageScript.enabled = true;
+                actionControlScript.SetIfMoveAble(false);
+                return;
+            }
         }
 
-        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "J_Bip_L_Hand");
-        if (makeDamageTr != null)
+        if (animator.gameObject.transform.parent.gameObject.name == "RobotBox")
         {
-            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.HandDamageMultipler;
-            makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
-            makeDamageScript.enabled = true;
-            actionControlScript.SetIfMoveAble(false);
-            return;
+
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftHand");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = BS_SGM_Script.instance.curLevelData.curDifficult;
+                makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
+                makeDamageScript.enabled = true;
+                actionControlScript.SetIfMoveAble(false);
+                return;
+            }
         }
     }
 
@@ -50,29 +69,57 @@ public class AniControlHandScript : BaseAniControlScript
     {
         angle = 120;
         ifNeedChangeRotation = true;
-        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase");
-        if (makeDamageTr != null)
-        {
-            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = 2;
-            makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
-            makeDamageScript.enabled = true;
-            actionControlScript.SetIfMoveAble(false);
-            return;
-        }
+        actionControlScript.SetIfMoveAble(false);
 
-        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "J_Bip_L_ToeBase");
-        if (makeDamageTr != null)
+    }
+
+    public void Begin_J_Damage()
+    {
+        if (animator.gameObject.transform.parent.gameObject.name == "CharacterBox")
         {
-            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.FootDamageMultipler;
-            makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
-            makeDamageScript.enabled = true;
-            actionControlScript.SetIfMoveAble(false);
-            return;
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.ATK_J;
+                makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
+                makeDamageScript.enabled = true;
+                return;
+            }
+
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "J_Bip_L_ToeBase");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.ATK_J;
+                makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
+                makeDamageScript.enabled = true;
+                actionControlScript.SetIfMoveAble(false);
+                return;
+            }
+        }
+        if (animator.gameObject.transform.parent.gameObject.name == "RobotBox")
+        {
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "mixamorig1:LeftToeBase");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = BS_SGM_Script.instance.curLevelData.curDifficult * 2;
+                makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
+                makeDamageScript.enabled = true;
+                return;
+            }
         }
     }
 
+    public void End_J_Damage()
+    {
+        if (makeDamageScript != null)
+        {
+            makeDamageScript.End();
+            makeDamageScript = null;
+        }
+    }
     public override void End_J()
     {
         ifNeedResoreRotation = true;
@@ -96,5 +143,5 @@ public class AniControlHandScript : BaseAniControlScript
     {
         ifNeedResoreRotation = true;
     }
-    
+
 }

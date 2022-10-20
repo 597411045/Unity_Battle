@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public static class MyUtil
@@ -22,4 +24,21 @@ public static class MyUtil
         return tmp;
     }
 
+    public static T GetClassFromBinary<T>(string path)
+    {
+        T tmp;
+        FileStream fs = File.Open(path, FileMode.Open);
+        BinaryFormatter bf = new BinaryFormatter();
+        tmp = (T)bf.Deserialize(fs);
+        fs.Close();
+        return tmp;
+    }
+
+    public static void SaveClassToBinary<T>(string path,T tmp)
+    {
+        FileStream fs = File.Open(path, FileMode.Create);
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(fs, tmp);
+        fs.Close();
+    }
 }

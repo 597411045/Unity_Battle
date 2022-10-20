@@ -8,4 +8,7 @@ public class ItemDetailScript : MonoBehaviour
     public string Description;
     public int Price;
 
+    public int ATK_H;
+    public int ATK_J;
+
 }

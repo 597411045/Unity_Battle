@@ -1,88 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SB_SGM_Script : SingleTon<SB_SGM_Script>
 {
-    public GameObject Character;
-    GameObject CharacterBox;
+    public CurLevelData curLevelData;
 
-    public GameObject Bag;
-    public GameObject Equipment;
-
+    public Image Retry_Button;
     public Image Continue_Button;
-    public Image Store_Button;
-    public Image Bag_Button;
 
-
-    public string CharacterName;
-    public string WeaponType;
+    Text Content_CD_Count;
+    Text Content_ID_Count;
+    Text Content_BK_Count;
+    Text Content_TotalScore;
+    Text Content_LV_Score;
+    Text Title_Level;
 
     private void Awake()
     {
-        base.InitInstance(this);
+        curLevelData = new CurLevelData();
+
+        instance = this;
+        string path = Application.dataPath + "/Resources/curLevelData";
+        curLevelData = MyUtil.GetClassFromBinary<CurLevelData>(path);
+        
     }
 
     void Start()
     {
-        CharacterBox = GameObject.Find("Box");
-        Bag = GameObject.Find("Bag"); ;
-        Equipment = GameObject.Find("Equipment");
-
         Continue_Button = GameObject.Find("Continue_Button").GetComponent<Image>();
-        Store_Button = GameObject.Find("Store_Button").GetComponent<Image>();
-        Bag_Button = GameObject.Find("Bag_Button").GetComponent<Image>();
+        Retry_Button = GameObject.Find("Retry_Button").GetComponent<Image>();
+        Content_CD_Count = GameObject.Find("Content_CD_Count").GetComponent<Text>();
+        Content_ID_Count = GameObject.Find("Content_ID_Count").GetComponent<Text>();
+        Content_BK_Count = GameObject.Find("Content_BK_Count").GetComponent<Text>();
+        Content_TotalScore = GameObject.Find("Content_TotalScore").GetComponent<Text>();
+        Content_LV_Score = GameObject.Find("Content_LV_Score").GetComponent<Text>();
+        Title_Level = GameObject.Find("Title_Level").GetComponentInChildren<Text>();
 
-        C1_On();
-        Bag_Off();
+        int LV_Score = ((curLevelData.isPassed ? 1 : 0) * curLevelData.curDifficult * 1000 + curLevelData.curLevel * 1000);
+        Content_LV_Score.text = LV_Score.ToString();
+        Content_CD_Count.text = curLevelData.CD_Count.ToString();
+        Content_ID_Count.text = curLevelData.ID_Count.ToString();
+        Content_BK_Count.text = curLevelData.BK_Count.ToString();
+        Content_TotalScore.text = (curLevelData.CD_Count * 2 + curLevelData.ID_Count * 5 + curLevelData.BK_Count + LV_Score).ToString();
+        Title_Level.text = "第" + curLevelData.curLevel.ToString() + "关，难度：" + curLevelData.curDifficult.ToString();
+
     }
 
-    public void C1_On()
-    {
-        //if (Character != null) Destroy(Character);
-        //C1_Button.color = Color.blue;
-        //C2_Button.color = Color.white;
-        //Character = Instantiate(Resources.Load<GameObject>("Prefabs/C1"), CharacterBox.transform.position, Quaternion.Euler(0, 180, 0), CharacterBox.transform);
-        //Character.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC/C1_Show");
 
-        //MyUtil.FindTransformInChildren(Character.transform, "Sword").gameObject.SetActive(false);
-        //CharacterName = "C1";
-        //WeaponType = "Hand";
-    }
 
-    public void C2_On()
-    {
-        //if (Character != null) Destroy(Character);
-        //C1_Button.color = Color.white;
-        //C2_Button.color = Color.blue;
-        //Character = Instantiate(Resources.Load<GameObject>("Prefabs/C2"), CharacterBox.transform.position, Quaternion.Euler(0, 180, 0), CharacterBox.transform);
-        //Character.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC/C2_Show");
-        //MyUtil.FindTransformInChildren(Character.transform, "Sword").gameObject.SetActive(false);
-        //CharacterName = "C2";
-    }
 
-    public void Bag_On()
-    {
-        Bag.SetActive(true);
-        Equipment.SetActive(true);
-        Bag_Button.color = Color.blue;
-    }
-
-    public void Bag_Off()
-    {
-        Bag.SetActive(false);
-        Equipment.SetActive(false);
-        Bag_Button.color = Color.white;
-    }
-
-    public void Bag_Switch()
-    {
-        Bag.SetActive(!Bag.activeSelf);
-        Equipment.SetActive(!Equipment.activeSelf);
-        Bag_Button.color = Bag.activeSelf ? Color.blue : Color.white;
-    }
 
     public void ChangeScene()
     {

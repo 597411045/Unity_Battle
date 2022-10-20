@@ -67,6 +67,22 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.42431614
+        functionName: Begin_J_Damage
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 619970b5f2266404d989b988c453209a,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.62145495
+        functionName: End_J_Damage
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 619970b5f2266404d989b988c453209a,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 1
         functionName: End_J
         data: 

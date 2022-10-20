@@ -27,14 +27,18 @@ public class ItemCountAbleScript : MonoBehaviour
     {
         return this.count;
     }
-    public void CountSS()
+    public void CountS(int i)
     {
-        this.count--;
+        this.count -= i;
         CountText.text = this.count.ToString();
+        if (count == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
-    public void CountPP()
+    public void CountP(int i)
     {
-        this.count++;
+        this.count += i;
         CountText.text = this.count.ToString();
     }
 }

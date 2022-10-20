@@ -23,7 +23,7 @@ public class SlotFunctionScript : MonoBehaviour, IBeginDragHandler, IDragHandler
             Old_iCAS = DragGO.GetComponentInChildren<ItemCountAbleScript>();
             if (Old_iCAS.GetCountText() > 1)
             {
-                Old_iCAS.CountSS();
+                Old_iCAS.CountS(1);
                 DragGO = Instantiate(Resources.Load("Prefabs/Item_Coin"), DragGOParent.transform) as GameObject;
                 New_iCAS = DragGO.GetComponentInChildren<ItemCountAbleScript>();
                 New_iCAS.SetCount(1);
@@ -59,6 +59,12 @@ public class SlotFunctionScript : MonoBehaviour, IBeginDragHandler, IDragHandler
             else if (eventData.pointerEnter.name.Split('_')[1] == DragGO.name.Split('_')[0])
             {
                 DragGOParent = eventData.pointerEnter;
+                if (DragGO.name.Contains("Weapon"))
+                {
+                    PB_SGM_Script.instance.gameData.WeaponType = DragGO.name.Split('_')[1];
+                    PB_SGM_Script.instance.gameData.ATK_H = DragGO.GetComponent<ItemDetailScript>().ATK_H;
+                    PB_SGM_Script.instance.gameData.ATK_J = DragGO.GetComponent<ItemDetailScript>().ATK_J;
+                }
             }
             else
             {
@@ -80,7 +86,7 @@ public class SlotFunctionScript : MonoBehaviour, IBeginDragHandler, IDragHandler
         if (DragGO.name.Contains("Item") && New_iCAS != null)
         {
             Destroy(DragGO);
-            Old_iCAS.CountPP();
+            Old_iCAS.CountP(1);
         }
         else
         {
@@ -104,7 +110,7 @@ public class SlotFunctionScript : MonoBehaviour, IBeginDragHandler, IDragHandler
     void EndIfItemPutToEmpyButTypeWorng()
     {
         Destroy(DragGO);
-        Old_iCAS.CountPP();
+        Old_iCAS.CountP(1);
         DragGO = null;
         DragGOParent = null;
         Old_iCAS = null;
@@ -114,13 +120,13 @@ public class SlotFunctionScript : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
         if (DragGO.name == eventData.pointerEnter.transform.GetChild(0).gameObject.name)
         {
-            eventData.pointerEnter.transform.GetChild(0).gameObject.GetComponent<ItemCountAbleScript>().CountPP();
+            eventData.pointerEnter.transform.GetChild(0).gameObject.GetComponent<ItemCountAbleScript>().CountP(1);
             Destroy(DragGO);
         }
         else if (DragGO.name.Contains("Item") && New_iCAS != null)
         {
             Destroy(DragGO);
-            Old_iCAS.CountPP();
+            Old_iCAS.CountP(1);
         }
         else
         {

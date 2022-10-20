@@ -9,17 +9,9 @@ using UnityEngine;
 public class GameData
 {
     public string CharacterName;
-    public int FootDamageMultipler;
-    public int HandDamageMultipler;
+    public int ATK_J;
+    public int ATK_H;
     public string WeaponType;
     public string EquipType;
 
-    public GameData()
-    {
-        CharacterName="C1";
-        FootDamageMultipler=2;
-        HandDamageMultipler=1;
-        WeaponType = "Sword";
-        EquipType = "";
-    }
 }

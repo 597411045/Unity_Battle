@@ -14,11 +14,14 @@ public class PB_SGM_Script : SingleTon<PB_SGM_Script>
     public GameObject LeftMessageBox;
     public GameObject RightMessageBox;
     public GameObject MessageBox_Buy;
+    public GameObject Hint_Buy;
 
     public Image C1_Button;
     public Image C2_Button;
     public Image Bag_Button;
     public Image Store_Button;
+
+    public GameData gameData;
 
 
     private void Awake()
@@ -34,11 +37,14 @@ public class PB_SGM_Script : SingleTon<PB_SGM_Script>
         LeftMessageBox = GameObject.Find("LeftMessageBox");
         RightMessageBox = GameObject.Find("RightMessageBox");
         MessageBox_Buy = GameObject.Find("MessageBox_Buy");
+        Hint_Buy = GameObject.Find("Hint");
 
         C1_Button = GameObject.Find("C1_Button").GetComponent<Image>();
         C2_Button = GameObject.Find("C2_Button").GetComponent<Image>();
         Bag_Button = GameObject.Find("Bag_Button").GetComponent<Image>();
         Store_Button = GameObject.Find("Store_Button").GetComponent<Image>();
+
+        gameData = new GameData();
 
         C1_On();
         BuildStoreItem();
@@ -46,7 +52,9 @@ public class PB_SGM_Script : SingleTon<PB_SGM_Script>
         All_Off();
         LeftMessageBox.active = false;
         RightMessageBox.active = false;
+        Hint_Buy.active = false;
         MessageBox_Buy.active = false;
+
     }
 
     public void C1_On()
@@ -58,6 +66,8 @@ public class PB_SGM_Script : SingleTon<PB_SGM_Script>
         Character.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC/C1_Show");
 
         MyUtil.FindTransformInChildren(Character.transform, "Sword").gameObject.SetActive(false);
+
+        gameData.CharacterName = "C1";
     }
     public void C2_On()
     {
@@ -67,6 +77,8 @@ public class PB_SGM_Script : SingleTon<PB_SGM_Script>
         Character = Instantiate(Resources.Load<GameObject>("Prefabs/C2"), Character_Box.transform.position, Quaternion.Euler(0, 180, 0), Character_Box.transform);
         Character.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC/C2_Show");
         MyUtil.FindTransformInChildren(Character.transform, "Sword").gameObject.SetActive(false);
+        gameData.CharacterName = "C2";
+
     }
     public void Equip_Switch()
     {
@@ -115,18 +127,24 @@ public class PB_SGM_Script : SingleTon<PB_SGM_Script>
             if (tmpTf[i].name == "Slot" && count == 3)
             {
                 GameObject tmpGO = Instantiate(Resources.Load("Prefabs/Weapon_Hand"), tmpTf[i]) as GameObject;
+                tmpGO.name = tmpGO.name.Replace("(Clone)", "");
                 tmpGO.GetComponent<ItemDetailScript>().Id = 1001;
                 tmpGO.GetComponent<ItemDetailScript>().Description = "A Hand Weapon";
                 tmpGO.GetComponent<ItemDetailScript>().Price = 10;
+                tmpGO.GetComponent<ItemDetailScript>().ATK_H = 1;
+                tmpGO.GetComponent<ItemDetailScript>().ATK_J = 2;
                 count--;
                 continue;
             }
             if (tmpTf[i].name == "Slot" && count == 2)
             {
                 GameObject tmpGO = Instantiate(Resources.Load("Prefabs/Weapon_Sword"), tmpTf[i]) as GameObject;
+                tmpGO.name = tmpGO.name.Replace("(Clone)", "");
                 tmpGO.GetComponent<ItemDetailScript>().Id = 1002;
                 tmpGO.GetComponent<ItemDetailScript>().Description = "A Sword Weapon";
                 tmpGO.GetComponent<ItemDetailScript>().Price = 100;
+                tmpGO.GetComponent<ItemDetailScript>().ATK_H = 2;
+                tmpGO.GetComponent<ItemDetailScript>().ATK_J = 4;
                 count--;
                 continue;
             }
@@ -149,7 +167,7 @@ public class PB_SGM_Script : SingleTon<PB_SGM_Script>
             if (tmpTf[i].name == "Slot")
             {
                 GameObject tmpGO = Instantiate(Resources.Load("Prefabs/Item_Coin"), tmpTf[i]) as GameObject;
-                tmpGO.GetComponent<ItemCountAbleScript>().SetCount(20);
+                tmpGO.GetComponent<ItemCountAbleScript>().SetCount(200);
                 return;
             }
         }

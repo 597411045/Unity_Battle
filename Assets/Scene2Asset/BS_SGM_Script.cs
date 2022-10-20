@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class BS_SGM_Script : SingleTon<BS_SGM_Script>
 {
     public GameData gameData;
-
+    public CurLevelData curLevelData;
 
     GameObject PlayerPosition;
     Animator PlayerAnimator;
@@ -32,18 +32,24 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
 
     private void Awake()
     {
-        base.InitInstance(this);
-        string path = Application.dataPath + "/Resources/gameData";
-        gameData = new GameData();
+        instance = this;
 
-        //gameData.CharacterName = PB_SGM_Script.instance.CharacterName;
-        //gameData.WeaponType = PB_SGM_Script.instance.WeaponType;
+        string pathGD = Application.dataPath + "/Resources/gameData";
+        gameData = MyUtil.GetClassFromBinary<GameData>(pathGD);
 
-        FileStream fs = File.Open(path, FileMode.Open);
-        BinaryFormatter bf = new BinaryFormatter();
-        gameData = bf.Deserialize(fs) as GameData;
-        fs.Close();
-        InfoBar = GameObject.Find("InfoBar");
+        string pathLD = Application.dataPath + "/Resources/curLevelData";
+        if (!File.Exists(pathLD))
+        {
+            curLevelData = new CurLevelData();
+            curLevelData.curLevel = 1;
+            curLevelData.curDifficult = 1;
+        }
+        else
+        {
+            curLevelData = MyUtil.GetClassFromBinary<CurLevelData>(pathLD);
+        }
+
+
         cinemachineTargetGroup = GameObject.Find("TargetGroup1").GetComponent<CinemachineTargetGroup>();
 
         PlayerHPBar = MyUtil.FindTransformInChildren(GameObject.Find("PlayerHPBar").transform, "HPValue").GetComponent<Image>();
@@ -53,12 +59,21 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
         BuildPlayer();
         BuildRobot();
 
-        InfoBar.SetActive(false);
         ifTimerOn = true;
+    }
+
+    private void Start()
+    {
+        InfoBar = GameObject.Find("InfoBar");
+        InfoBar.SetActive(false);
     }
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.F1))
+        {
+            EndDuel();
+        }
         if (ifTimerOn)
         {
             Timer.text = Time.time.ToString("00");
@@ -71,18 +86,18 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
         tmpGO = Instantiate(Resources.Load<GameObject>("Prefabs/C2"), RobotPosition.transform.position, Quaternion.Euler(0, 270, 0), RobotPosition.transform);
         tmpGO.name = "Enemy";
         RobotAnimator = tmpGO.GetComponent<Animator>();
-        //if (gameData.WeaponType == "Hand")
+        if (curLevelData.curLevel == 1)
         {
             tmpGO.AddComponent<AniControlHandScript>();
             RobotAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC/ACHumanEnemy");
             MyUtil.FindTransformInChildren(RobotPosition.transform, "Sword").gameObject.SetActive(false);
 
         }
-        //if (gameData.WeaponType == "Sword")
-        //{
-        //    tmpGO.AddComponent<AniControlHandScript>();
-        //    PlayerAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC/ACHumanSword");
-        //}
+        else if (curLevelData.curLevel == 2)
+        {
+            tmpGO.AddComponent<AniControlSwordScript>();
+            RobotAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC/ACHumanSwordEnemy");
+        }
         RobotPosition.AddComponent<AIActionControlScript>();
         RobotPosition.AddComponent<GoundDetectScript>();
 
@@ -125,6 +140,7 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
         {
             InfoBar.GetComponentInChildren<Text>().text = "YOU WIN";
             StartCoroutine(CR_ChangeSceneWhenWin());
+            curLevelData.isPassed = true;
         }
         else
         {
@@ -132,8 +148,13 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
             RobotAnimator.SetBool("isVectory", true);
             PlayerPosition.GetComponentInChildren<BaseActionControlScript>().enabled = false;
             StartCoroutine(CR_ChangeSceneWhenLose());
+            curLevelData.isPassed = false;
         }
         RobotPosition.GetComponentInChildren<BaseActionControlScript>().enabled = false;
+
+        string path = Application.dataPath + "/Resources/curLevelData";
+        MyUtil.SaveClassToBinary<CurLevelData>(path, curLevelData);
+
     }
 
     IEnumerator CR_ChangeSceneWhenWin()

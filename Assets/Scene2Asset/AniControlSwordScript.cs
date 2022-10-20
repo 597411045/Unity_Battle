@@ -22,16 +22,46 @@ public class AniControlSwordScript : BaseAniControlScript
     {
         angle = 135;
         ifNeedChangeRotation = true;
+        actionControlScript.SetIfMoveAble(false);
 
-        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "Sword");
-        if (makeDamageTr != null)
+
+    }
+
+    public void Begin_H_Damage()
+    {
+        if (animator.gameObject.transform.parent.gameObject.name == "CharacterBox")
         {
-            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = 3;
-            makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
-            makeDamageScript.enabled = true;
-            actionControlScript.SetIfMoveAble(false);
-            return;
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "Sword");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.ATK_H;
+                makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
+                makeDamageScript.enabled = true;
+                return;
+            }
+        }
+        if (animator.gameObject.transform.parent.gameObject.name == "RobotBox")
+        {
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "Sword");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = 2 * BS_SGM_Script.instance.curLevelData.curDifficult;
+                makeDamageScript.damageForce = new Vector3(0.5f * actionControlScript.XAxis, 0, 0); ;
+                makeDamageScript.enabled = true;
+                return;
+            }
+        }
+
+    }
+
+    public void End_H_Damage()
+    {
+        if (makeDamageScript != null)
+        {
+            makeDamageScript.End();
+            makeDamageScript = null;
         }
     }
 
@@ -44,18 +74,44 @@ public class AniControlSwordScript : BaseAniControlScript
     {
         angle = 135;
         ifNeedChangeRotation = true;
+        actionControlScript.SetIfMoveAble(false);
+    }
 
-        makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "Sword");
-        if (makeDamageTr != null)
+    public void Begin_J_Damage()
+    {
+        if (animator.gameObject.transform.parent.gameObject.name == "CharacterBox")
         {
-            makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
-            makeDamageScript.damageMultipler = 5;
-            makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
-            makeDamageScript.enabled = true;
-            actionControlScript.SetIfMoveAble(false);
-            return;
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "Sword");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = BS_SGM_Script.instance.gameData.ATK_J;
+                makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
+                makeDamageScript.enabled = true;
+                return;
+            }
         }
+        if (animator.gameObject.transform.parent.gameObject.name == "RobotBox")
+        {
+            makeDamageTr = MyUtil.FindTransformInChildren(this.transform, "Sword");
+            if (makeDamageTr != null)
+            {
+                makeDamageScript = makeDamageTr.gameObject.GetComponent<MakeDamageScript>();
+                makeDamageScript.damageMultipler = 4 * BS_SGM_Script.instance.curLevelData.curDifficult;
+                makeDamageScript.damageForce = new Vector3(1 * actionControlScript.XAxis, 1, 0); ;
+                makeDamageScript.enabled = true;
+                return;
+            }
+        }
+    }
 
+    public void End_J_Damage()
+    {
+        if (makeDamageScript != null)
+        {
+            makeDamageScript.End();
+            makeDamageScript = null;
+        }
     }
 
     public override void End_J()

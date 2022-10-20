@@ -60,8 +60,12 @@ public class TakeDamageScript : MonoBehaviour
             UIText = "格挡部位：" + this.gameObject.name.Replace("mixamorig1:", "")
                 + "伤害值：" + totalDamage;
             actionControlScript.SetIfMoveAble(false);
-            rigidbody.velocity = new Vector3(damageForce.normalized.x * 5, 0, 0);
+            rigidbody.velocity = new Vector3(damageForce.normalized.x * 5 * 0.5f, 0, 0);
             actionControlScript.HPBar.fillAmount -= totalDamage / 100f;
+            if (animator.gameObject.transform.parent.gameObject.name == "CharacterBox")
+            {
+                BS_SGM_Script.instance.curLevelData.BK_Count++;
+            }
         }
         else
         {
@@ -71,8 +75,19 @@ public class TakeDamageScript : MonoBehaviour
                 + "伤害值：" + totalDamage;
             animator.SetTrigger("isInjured");
             actionControlScript.SetIfMoveAble(false);
-            rigidbody.velocity = damageForce * totalDamage * 0.1f;
+            rigidbody.velocity = damageForce * totalDamage * 0.1f * 0.5f;
             actionControlScript.HPBar.fillAmount -= totalDamage / 100f;
+            if (animator.gameObject.transform.parent.gameObject.name == "RobotBox")
+            {
+                if (this.gameObject.name.Contains("Head") || this.gameObject.name.Contains("Hips"))
+                {
+                    BS_SGM_Script.instance.curLevelData.ID_Count++;
+                }
+                else
+                {
+                    BS_SGM_Script.instance.curLevelData.CD_Count++;
+                }
+            }
         }
         Debug.Log(DebugText);
         go.GetComponent<Text>().text = UIText;

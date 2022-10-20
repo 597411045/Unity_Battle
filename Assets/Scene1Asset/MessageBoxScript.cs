@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MessageBoxScript : MonoBehaviour
 {
-    GameObject targetGO;
+    public GameObject targetGO;
     Text Content_Id;
     Text Content_Des;
     Text Content_Price;
