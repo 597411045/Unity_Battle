@@ -10,6 +10,9 @@ public class ItemCountAbleScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        this.gameObject.GetComponent<ItemDetailScript>().Id = 1003;
+        this.gameObject.GetComponent<ItemDetailScript>().Description = "金钱堆";
+        this.gameObject.GetComponent<ItemDetailScript>().Price = 1;
         CountText = this.gameObject.GetComponentInChildren<Text>();
     }
 
