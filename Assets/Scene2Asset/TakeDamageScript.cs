@@ -41,14 +41,14 @@ public class TakeDamageScript : MonoBehaviour
         GameObject go = Instantiate(Resources.Load("Prefabs\\Hint"), UICamera.ViewportToWorldPoint(new Vector3(v.x, v.y, 5)), Quaternion.identity, UICanvas.transform) as GameObject;
 
 
-        bodyDamage = 2;
+        bodyDamage = 1;
         if (this.gameObject.name.Contains("Head"))
         {
-            bodyDamage = 10;
+            bodyDamage = 3;
         }
         if (this.gameObject.name.Contains("Hips"))
         {
-            bodyDamage = 5;
+            bodyDamage = 2;
         }
 
 
@@ -60,7 +60,7 @@ public class TakeDamageScript : MonoBehaviour
             UIText = "格挡部位：" + this.gameObject.name.Replace("mixamorig1:", "")
                 + "伤害值：" + totalDamage;
             actionControlScript.SetIfMoveAble(false);
-            rigidbody.velocity = new Vector3(damageForce.normalized.x * 5 * 0.5f, 0, 0);
+            rigidbody.velocity = new Vector3(damageForce.x * 0.5f, 0, 0);
             actionControlScript.HPBar.fillAmount -= totalDamage / 100f;
             if (animator.gameObject.transform.parent.gameObject.name == "CharacterBox")
             {
@@ -75,7 +75,7 @@ public class TakeDamageScript : MonoBehaviour
                 + "伤害值：" + totalDamage;
             animator.SetTrigger("isInjured");
             actionControlScript.SetIfMoveAble(false);
-            rigidbody.velocity = damageForce * totalDamage * 0.1f * 0.5f;
+            rigidbody.velocity = new Vector3(damageForce.x, 0, 0);
             actionControlScript.HPBar.fillAmount -= totalDamage / 100f;
             if (animator.gameObject.transform.parent.gameObject.name == "RobotBox")
             {
