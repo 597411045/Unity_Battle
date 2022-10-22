@@ -62,7 +62,10 @@
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
     <Compile Include="Assets\CurLevelData.cs" />
     <Compile Include="Assets\GameData.cs" />
+    <Compile Include="Assets\GitTestScript.cs" />
+    <Compile Include="Assets\MainCamera_AE_Script.cs" />
     <Compile Include="Assets\MyUtil.cs" />
+    <Compile Include="Assets\NavScript.cs" />
     <Compile Include="Assets\Scene0Asset\LOGIN_SGM_Script.cs" />
     <Compile Include="Assets\Scene0Asset\LoginButtonScript.cs" />
     <Compile Include="Assets\Scene0Asset\RegisterButtonScript.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="Assets\SingleTon.cs" />
     <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
+    <Compile Include="Assets\UserBlock_Script.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -127,6 +131,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\AddsOn\Mysql\libzstd.dll" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\AddsOn\System.Drawing.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\AddsOn\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_normal.hlsl" />
     <None Include="Assets\AddsOn\DynamicBone\ReadMe.txt" />
@@ -321,6 +326,9 @@
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>E:\Unity\Editor\2019.4.29f1c2\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>Assets\AddsOn\System.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>Assets\AddsOn\Mysql\BouncyCastle.Crypto.dll</HintPath>

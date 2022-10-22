@@ -254,6 +254,9 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>E:\Unity\Editor\2019.4.29f1c2\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>Assets\AddsOn\System.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>Assets\AddsOn\Mysql\BouncyCastle.Crypto.dll</HintPath>
     </Reference>

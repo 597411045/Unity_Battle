@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEditor;
@@ -91,7 +92,6 @@ public class ButtonsFunctionScript : MonoBehaviour, IPointerClickHandler
             StartCoroutine(CR_EndBuyButton());
 
         }
-
         if (this.gameObject.name.Equals("Retry_Button"))
         {
             SceneManager.LoadScene(2);
@@ -113,8 +113,39 @@ public class ButtonsFunctionScript : MonoBehaviour, IPointerClickHandler
             MyUtil.SaveClassToBinary<CurLevelData>(path, SB_SGM_Script.instance.curLevelData);
             SceneManager.LoadScene(2);
         }
+        if (this.gameObject.name.Equals("Register_Button"))
+        {
+            Help.BrowseURL("http://81.68.87.60/app.publish/Register");
+
+            LOGIN_SGM_Script.instance.OnRegisterButtonClick();
+        }
+        if (this.gameObject.name.Equals("Login_Button"))
+        {
+
+            LOGIN_SGM_Script.instance.OnLoginButtonClick();
+
+
+        }
     }
 
+    DataSet ds;
+    DataTable dt;
+    string cmdStr;
+
+    void GetDataAndSaveData()
+    {
+        ds = new DataSet();
+        cmdStr = "SELECT * FROM `unity`.`tbl_user` WHERE `name`='" + LOGIN_SGM_Script.instance.Name_Text.text + "' AND `password`='" + LOGIN_SGM_Script.instance.Password_Text.text + "';";
+        int result = MyUtil.GetDataFromMySQL(cmdStr, ds);
+        if (result == 1)
+        {
+            dt = ds.Tables[0];
+            if (dt.Rows.Count == 1)
+            {
+                //UserInfo tmp= new UserInfo();
+            }
+        }
+    }
 
     IEnumerator CR_EndBuyButton()
     {

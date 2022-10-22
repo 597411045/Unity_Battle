@@ -15,3 +15,20 @@ public class GameData
     public string EquipType;
 
 }
+
+[Serializable]
+public class UserInfo
+{
+    public string name;
+    public int coin;
+    public int vipLevel;
+    public string lastLoginTime;
+
+    public UserInfo(string name, int coin, int vipLevel, string lastLoginTime)
+    {
+        this.name = name;
+        this.coin = coin;
+        this.vipLevel = vipLevel;
+        this.lastLoginTime = lastLoginTime;
+    }
+}
