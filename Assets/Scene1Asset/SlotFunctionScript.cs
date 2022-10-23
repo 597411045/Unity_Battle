@@ -61,9 +61,9 @@ public class SlotFunctionScript : MonoBehaviour, IBeginDragHandler, IDragHandler
                 DragGOParent = eventData.pointerEnter;
                 if (DragGO.name.Contains("Weapon"))
                 {
-                    PB_SGM_Script.instance.gameData.WeaponType = DragGO.name.Split('_')[1];
-                    PB_SGM_Script.instance.gameData.ATK_H = DragGO.GetComponent<ItemDetailScript>().ATK_H;
-                    PB_SGM_Script.instance.gameData.ATK_J = DragGO.GetComponent<ItemDetailScript>().ATK_J;
+                    Obsolete_PB_SGM_Script.instance.gameData.WeaponType = DragGO.name.Split('_')[1];
+                    Obsolete_PB_SGM_Script.instance.gameData.ATK_H = DragGO.GetComponent<ItemDetailScript>().ATK_H;
+                    Obsolete_PB_SGM_Script.instance.gameData.ATK_J = DragGO.GetComponent<ItemDetailScript>().ATK_J;
                 }
             }
             else
@@ -165,11 +165,11 @@ public class SlotFunctionScript : MonoBehaviour, IBeginDragHandler, IDragHandler
 
         if (eventData.pointerEnter.transform.parent.name == "Store" || eventData.pointerEnter.transform.parent.name == "Equipment")
         {
-            MessageBox_Des = PB_SGM_Script.instance.LeftMessageBox;
+            MessageBox_Des = Obsolete_PB_SGM_Script.instance.LeftMessageBox;
         }
         else if (eventData.pointerEnter.transform.parent.name == "Bag")
         {
-            MessageBox_Des = PB_SGM_Script.instance.RightMessageBox;
+            MessageBox_Des = Obsolete_PB_SGM_Script.instance.RightMessageBox;
         }
 
         MessageBox_Des.active = true;
@@ -193,7 +193,7 @@ public class SlotFunctionScript : MonoBehaviour, IBeginDragHandler, IDragHandler
 
         ClickGO = eventData.pointerEnter.transform.GetChild(0).gameObject;
         ITS_Des = ClickGO.GetComponentInChildren<ItemDetailScript>();
-        MessageBox_Buy = PB_SGM_Script.instance.MessageBox_Buy;
+        MessageBox_Buy = Obsolete_PB_SGM_Script.instance.MessageBox_Buy;
         MessageBox_Buy.active = true;
 
         ICAS_Buy = ClickGO.GetComponent<ItemCountAbleScript>();

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_BlinkScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    public static Material defaultImageMaterial;
     public Material material;
     float timer1;
     float timer2;
@@ -22,8 +24,18 @@ public class UI_BlinkScript : MonoBehaviour
         if (this.gameObject.name.Contains("TMP"))
         {
             textMeshPro = this.GetComponent<TextMeshPro>();
-            ifRecycle = false;
             isTextMode = true;
+        }
+        else if (this.gameObject.name == "ExitBlackScreen")
+        {
+            material = this.gameObject.GetComponent<Image>().material;
+            ifAscend = true;
+        }
+        else if (this.gameObject.name == "EnterBlackScreen")
+        {
+            material = this.gameObject.GetComponent<Image>().material;
+            ifFade = true;
+            defaultImageMaterial = material;
         }
         else
         {
@@ -38,12 +50,12 @@ public class UI_BlinkScript : MonoBehaviour
         if (ifRecycle)
         {
             timer1 += Time.deltaTime;
-            material.SetColor("_Color", new Color(1, 1, 1, LOGIN_SGM_Script.instance.recycleCurve.Evaluate(timer1)));
+            material.SetColor("_Color", new Color(1, 1, 1, Base_SGM.RecycleCurve.Evaluate(timer1)));
         }
         if (ifFade)
         {
             timer2 += Time.deltaTime;
-            material.SetColor("_Color", new Color(1, 1, 1, LOGIN_SGM_Script.instance.fadeCurve.Evaluate(timer2)));
+            material.SetColor("_Color", new Color(1, 1, 1, Base_SGM.FadeCurve.Evaluate(timer2)));
             if (timer2 >= 1)
             {
                 ifFade = false;
@@ -52,7 +64,7 @@ public class UI_BlinkScript : MonoBehaviour
         if (ifAscend)
         {
             timer2 += Time.deltaTime;
-            material.SetColor("_Color", new Color(1, 1, 1, LOGIN_SGM_Script.instance.ascendCurve.Evaluate(timer2)));
+            material.SetColor("_Color", new Color(1, 1, 1, Base_SGM.AscendCurve.Evaluate(timer2)));
             if (timer2 >= 1)
             {
                 ifAscend = false;
@@ -61,7 +73,7 @@ public class UI_BlinkScript : MonoBehaviour
         if (isTextMode)
         {
             timer1 += Time.deltaTime;
-            textMeshPro.color = new Color(1, 1, 1, LOGIN_SGM_Script.instance.recycleCurve.Evaluate(timer1));
+            textMeshPro.color = new Color(1, 1, 1, Base_SGM.RecycleCurve.Evaluate(timer1));
         }
     }
 

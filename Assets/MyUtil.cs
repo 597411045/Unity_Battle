@@ -10,6 +10,7 @@ using UnityEngine;
 public static class MyUtil
 {
     public static string mainPath = Application.dataPath + "/Resources";
+    
 
     public static Transform FindTransformInChildren(Transform t, string childName)
     {
@@ -49,6 +50,8 @@ public static class MyUtil
     static string connStr = "Server=81.68.87.60;Port=3307;Database=unity;Uid=sa;Pwd=P@ss1234;Charset=utf8";
     static MySqlConnection conn;
     static MySqlDataAdapter adapter;
+    static MySqlCommand cmd;
+
 
     public static int GetDataFromMySQL(string cmdStr, DataSet ds)
     {
@@ -65,6 +68,33 @@ public static class MyUtil
                 adapter = new MySqlDataAdapter(cmdStr, conn);
                 adapter.Fill(ds);
                 result = 1;
+            }
+        }
+        catch (Exception e)
+        {
+            result = -1;
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return result;
+    }
+
+    public static int SaveDataToMySQL(string cmdStr)
+    {
+        int result = 0;
+        try
+        {
+            if (conn == null)
+            {
+                conn = new MySqlConnection(connStr);
+            }
+            conn.Open();
+            if (conn.State == System.Data.ConnectionState.Open)
+            {
+                cmd = new MySqlCommand(cmdStr, conn);
+                result = cmd.ExecuteNonQuery();
             }
         }
         catch (Exception e)

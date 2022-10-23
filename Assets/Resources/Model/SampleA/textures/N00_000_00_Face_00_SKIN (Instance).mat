@@ -105,8 +105,8 @@ Material:
     - _OutlineColorMode: 0
     - _OutlineCullMode: 1
     - _OutlineLightingMix: 1
-    - _OutlineScaledMaxDistance: 1
-    - _OutlineWidth: 0.5
+    - _OutlineScaledMaxDistance: 10
+    - _OutlineWidth: 1
     - _OutlineWidthMode: 0
     - _Parallax: 0.02
     - _ReceiveShadowRate: 1
@@ -127,6 +127,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.9716981, g: 0.050418302, b: 0.050418302, a: 1}
     - _RimColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadeColor: {r: 0.97, g: 0.81, b: 0.86, a: 1}

@@ -19,16 +19,23 @@ public class GameData
 [Serializable]
 public class UserInfo
 {
+    public int id;
     public string name;
     public int coin;
     public int vipLevel;
-    public string lastLoginTime;
+    public DateTime lastLoginTime;
 
-    public UserInfo(string name, int coin, int vipLevel, string lastLoginTime)
-    {
-        this.name = name;
-        this.coin = coin;
-        this.vipLevel = vipLevel;
-        this.lastLoginTime = lastLoginTime;
-    }
+    //public UserInfo(string name, int coin, int vipLevel, DateTime lastLoginTime)
+    //{
+    //    this.name = name;
+    //    this.coin = coin;
+    //    this.vipLevel = vipLevel;
+    //    this.lastLoginTime = lastLoginTime;
+    //}
+}
+
+public enum DialogHint
+{
+    Default,
+    LoginSuccess
 }

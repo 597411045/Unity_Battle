@@ -60,20 +60,26 @@
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBoneCollider.cs" />
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBoneColliderBase.cs" />
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
+    <Compile Include="Assets\Base_SGM.cs" />
     <Compile Include="Assets\CurLevelData.cs" />
     <Compile Include="Assets\GameData.cs" />
-    <Compile Include="Assets\GitTestScript.cs" />
-    <Compile Include="Assets\MainCamera_AE_Script.cs" />
     <Compile Include="Assets\MyUtil.cs" />
-    <Compile Include="Assets\NavScript.cs" />
+    <Compile Include="Assets\Obsolete\GitTestScript.cs" />
+    <Compile Include="Assets\Obsolete\Obsolete_LoginButtonScript.cs" />
+    <Compile Include="Assets\Obsolete\Obsolete_PB_SGM_Script.cs" />
+    <Compile Include="Assets\Obsolete\Obsolete_RegisterButtonScript.cs" />
+    <Compile Include="Assets\OutlineScript.cs" />
+    <Compile Include="Assets\SampleInfoScript.cs" />
     <Compile Include="Assets\Scene0Asset\LOGIN_SGM_Script.cs" />
-    <Compile Include="Assets\Scene0Asset\LoginButtonScript.cs" />
-    <Compile Include="Assets\Scene0Asset\RegisterButtonScript.cs" />
+    <Compile Include="Assets\Scene0Asset\MainCamera_AE_Script.cs" />
+    <Compile Include="Assets\Scene0Asset\NavScript.cs" />
     <Compile Include="Assets\Scene0Asset\UI_BlinkScript.cs" />
+    <Compile Include="Assets\Scene0Asset\UserBlock_Script.cs" />
     <Compile Include="Assets\Scene1Asset\ButtonsFunctionScript.cs" />
     <Compile Include="Assets\Scene1Asset\ItemCountAbleScript.cs" />
     <Compile Include="Assets\Scene1Asset\ItemDetailScript.cs" />
     <Compile Include="Assets\Scene1Asset\MessageBoxScript.cs" />
+    <Compile Include="Assets\Scene1Asset\NavScriptS1.cs" />
     <Compile Include="Assets\Scene1Asset\PB_SGM_Script.cs" />
     <Compile Include="Assets\Scene1Asset\SlotFunctionScript.cs" />
     <Compile Include="Assets\Scene2Asset\AIActionControlScript.cs" />
@@ -88,10 +94,8 @@
     <Compile Include="Assets\Scene2Asset\PlayerActionControlScript.cs" />
     <Compile Include="Assets\Scene2Asset\TakeDamageScript.cs" />
     <Compile Include="Assets\Scene3Asset\SB_SGM_Script.cs" />
-    <Compile Include="Assets\SingleTon.cs" />
     <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
-    <Compile Include="Assets\UserBlock_Script.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

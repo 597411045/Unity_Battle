@@ -41,14 +41,14 @@ public class TakeDamageScript : MonoBehaviour
         GameObject go = Instantiate(Resources.Load("Prefabs\\Hint"), UICamera.ViewportToWorldPoint(new Vector3(v.x, v.y, 5)), Quaternion.identity, UICanvas.transform) as GameObject;
 
 
-        bodyDamage = 1;
+        bodyDamage = 3;
         if (this.gameObject.name.Contains("Head"))
         {
-            bodyDamage = 3;
+            bodyDamage = 9;
         }
         if (this.gameObject.name.Contains("Hips"))
         {
-            bodyDamage = 2;
+            bodyDamage = 6;
         }
 
 

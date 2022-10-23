@@ -8,8 +8,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class BS_SGM_Script : SingleTon<BS_SGM_Script>
+public class BS_SGM_Script :MonoBehaviour
 {
+    public static BS_SGM_Script instance;
+
     public GameData gameData;
     public CurLevelData curLevelData;
 
@@ -33,7 +35,6 @@ public class BS_SGM_Script : SingleTon<BS_SGM_Script>
     private void Awake()
     {
         instance = this;
-
         string pathGD = Application.dataPath + "/Resources/gameData";
         gameData = MyUtil.GetClassFromBinary<GameData>(pathGD);
 

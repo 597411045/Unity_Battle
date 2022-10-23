@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,53 +12,54 @@ using UnityEngine.UI;
 
 public class ButtonsFunctionScript : MonoBehaviour, IPointerClickHandler
 {
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (this.gameObject.name.Contains("C1"))
         {
-            PB_SGM_Script.instance.C1_On();
+            Obsolete_PB_SGM_Script.instance.C1_On();
             return;
         }
         if (this.gameObject.name.Contains("C2"))
         {
-            PB_SGM_Script.instance.C2_On();
+            Obsolete_PB_SGM_Script.instance.C2_On();
             return;
         }
         if (this.gameObject.name.Equals("Bag_Button"))
         {
-            PB_SGM_Script.instance.Equip_Switch();
+            Obsolete_PB_SGM_Script.instance.Equip_Switch();
             return;
         }
         if (this.gameObject.name.Equals("Store_Button"))
         {
-            PB_SGM_Script.instance.Store_Switch();
+            Obsolete_PB_SGM_Script.instance.Store_Switch();
             return;
         }
         if (this.gameObject.name.Equals("Start_Button"))
         {
+            //if (Obsolete_PB_SGM_Script.instance.gameData.CharacterName != "C1" && Obsolete_PB_SGM_Script.instance.gameData.CharacterName != "C2") return;
+            //if (Obsolete_PB_SGM_Script.instance.gameData.WeaponType != "Sword" && Obsolete_PB_SGM_Script.instance.gameData.WeaponType != "Hand") return;
 
+            //string path = Application.dataPath + "/Resources/gameData";
+            //MyUtil.SaveClassToBinary<GameData>(path, Obsolete_PB_SGM_Script.instance.gameData);
 
-            if (PB_SGM_Script.instance.gameData.CharacterName != "C1" && PB_SGM_Script.instance.gameData.CharacterName != "C2") return;
-            if (PB_SGM_Script.instance.gameData.WeaponType != "Sword" && PB_SGM_Script.instance.gameData.WeaponType != "Hand") return;
+            //Obsolete_PB_SGM_Script.instance.ChangeScene();
+            PB_SGM_Script._Instance.ShowLoadingUI();
 
-            string path = Application.dataPath + "/Resources/gameData";
-            MyUtil.SaveClassToBinary<GameData>(path, PB_SGM_Script.instance.gameData);
-
-            PB_SGM_Script.instance.ChangeScene();
         }
         if (this.gameObject.name.Equals("CancelBuy_Button"))
         {
-            PB_SGM_Script.instance.MessageBox_Buy.active = false;
+            Obsolete_PB_SGM_Script.instance.MessageBox_Buy.active = false;
         }
         if (this.gameObject.name.Equals("Buy_Button"))
         {
 
 
             int TotalSellMoney;
-            TotalSellMoney = int.Parse(PB_SGM_Script.instance.MessageBox_Buy.GetComponent<MessageBoxScript>().Content_TotalPrice.text);
+            TotalSellMoney = int.Parse(Obsolete_PB_SGM_Script.instance.MessageBox_Buy.GetComponent<MessageBoxScript>().Content_TotalPrice.text);
 
             int playerMoney = 0;
-            Transform[] tmpTf = PB_SGM_Script.instance.Bag_Box.GetComponentsInChildren<Transform>();
+            Transform[] tmpTf = Obsolete_PB_SGM_Script.instance.Bag_Box.GetComponentsInChildren<Transform>();
             for (int i = 0; i < tmpTf.Length; i++)
             {
                 if (tmpTf[i].name.Contains("Item_Coin"))
@@ -66,16 +68,16 @@ public class ButtonsFunctionScript : MonoBehaviour, IPointerClickHandler
 
                     if (playerMoney >= TotalSellMoney)
                     {
-                        PB_SGM_Script.instance.Hint_Buy.active = true;
-                        PB_SGM_Script.instance.Hint_Buy.GetComponentInChildren<Text>().text = "购买成功";
+                        Obsolete_PB_SGM_Script.instance.Hint_Buy.active = true;
+                        Obsolete_PB_SGM_Script.instance.Hint_Buy.GetComponentInChildren<Text>().text = "购买成功";
 
-                        Transform[] tmpTf2 = PB_SGM_Script.instance.Bag_Box.GetComponentsInChildren<Transform>();
+                        Transform[] tmpTf2 = Obsolete_PB_SGM_Script.instance.Bag_Box.GetComponentsInChildren<Transform>();
                         for (int j = 0; j < tmpTf.Length; j++)
                         {
-                            if (tmpTf[j].name == "Slot" && tmpTf[j].GetChildCount() == 0)
+                            if (tmpTf[j].name == "Slot" && tmpTf[j].childCount == 0)
                             {
-                                PB_SGM_Script.instance.MessageBox_Buy.GetComponent<MessageBoxScript>().targetGO.transform.SetParent(tmpTf[j]);
-                                PB_SGM_Script.instance.MessageBox_Buy.GetComponent<MessageBoxScript>().targetGO.transform.localPosition = new Vector3(0, 0, 0);
+                                Obsolete_PB_SGM_Script.instance.MessageBox_Buy.GetComponent<MessageBoxScript>().targetGO.transform.SetParent(tmpTf[j]);
+                                Obsolete_PB_SGM_Script.instance.MessageBox_Buy.GetComponent<MessageBoxScript>().targetGO.transform.localPosition = new Vector3(0, 0, 0);
 
                                 tmpTf[i].gameObject.GetComponent<ItemCountAbleScript>().CountS(TotalSellMoney);
 
@@ -87,8 +89,8 @@ public class ButtonsFunctionScript : MonoBehaviour, IPointerClickHandler
                 }
             }
 
-            PB_SGM_Script.instance.Hint_Buy.active = true;
-            PB_SGM_Script.instance.Hint_Buy.GetComponentInChildren<Text>().text = "购买失败";
+            Obsolete_PB_SGM_Script.instance.Hint_Buy.active = true;
+            Obsolete_PB_SGM_Script.instance.Hint_Buy.GetComponentInChildren<Text>().text = "购买失败";
             StartCoroutine(CR_EndBuyButton());
 
         }
@@ -115,43 +117,40 @@ public class ButtonsFunctionScript : MonoBehaviour, IPointerClickHandler
         }
         if (this.gameObject.name.Equals("Register_Button"))
         {
-            Help.BrowseURL("http://81.68.87.60/app.publish/Register");
+            Application.OpenURL("http://81.68.87.60/app.publish/Register");
+            //Help.BrowseURL("http://81.68.87.60/app.publish/Register");
 
-            LOGIN_SGM_Script.instance.OnRegisterButtonClick();
+            LOGIN_SGM_Script._Instance.OnRegisterButtonClick();
         }
         if (this.gameObject.name.Equals("Login_Button"))
         {
-
-            LOGIN_SGM_Script.instance.OnLoginButtonClick();
-
-
+            LOGIN_SGM_Script._Instance.OnLoginButtonClick();
         }
-    }
-
-    DataSet ds;
-    DataTable dt;
-    string cmdStr;
-
-    void GetDataAndSaveData()
-    {
-        ds = new DataSet();
-        cmdStr = "SELECT * FROM `unity`.`tbl_user` WHERE `name`='" + LOGIN_SGM_Script.instance.Name_Text.text + "' AND `password`='" + LOGIN_SGM_Script.instance.Password_Text.text + "';";
-        int result = MyUtil.GetDataFromMySQL(cmdStr, ds);
-        if (result == 1)
+        if (this.gameObject.name.Equals("Guest_Button"))
         {
-            dt = ds.Tables[0];
-            if (dt.Rows.Count == 1)
-            {
-                //UserInfo tmp= new UserInfo();
-            }
+            LOGIN_SGM_Script._Instance.ShowLoadingUI();
+        }
+        if (this.gameObject.name.Equals("SystemButton_1"))
+        {
+            //LOGIN_SGM_Script._Instance.ShowLoadingUI();
+        }
+        if (this.gameObject.name.Equals("ReChoose_Button"))
+        {
+            PB_SGM_Script._Instance.BackToChooseStage();
+        }
+        if (this.gameObject.name.Equals("SystemButton_3")) {
+            Application.Quit(0);
         }
     }
+
+
+
 
     IEnumerator CR_EndBuyButton()
     {
         yield return new WaitForSeconds(1);
-        PB_SGM_Script.instance.Hint_Buy.active = false;
-        PB_SGM_Script.instance.MessageBox_Buy.active = false;
+        Obsolete_PB_SGM_Script.instance.Hint_Buy.active = false;
+        Obsolete_PB_SGM_Script.instance.MessageBox_Buy.active = false;
     }
 }
 

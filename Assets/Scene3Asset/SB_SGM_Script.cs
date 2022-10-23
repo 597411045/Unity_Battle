@@ -6,8 +6,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SB_SGM_Script : SingleTon<SB_SGM_Script>
+public class SB_SGM_Script :MonoBehaviour
 {
+    public static SB_SGM_Script instance; 
     public CurLevelData curLevelData;
 
     public Image Retry_Button;
@@ -24,7 +25,6 @@ public class SB_SGM_Script : SingleTon<SB_SGM_Script>
     {
         curLevelData = new CurLevelData();
 
-        instance = this;
         string path = Application.dataPath + "/Resources/curLevelData";
         curLevelData = MyUtil.GetClassFromBinary<CurLevelData>(path);
         
