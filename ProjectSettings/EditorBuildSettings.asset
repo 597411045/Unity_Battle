@@ -17,4 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleResult.unity
     guid: 8d3f8e56dc93f714c80747511e0d0ef1
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 5c963c612b4f98944bd63499d9ecc9e0,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 659b3cae172c7c04cb611455e2db2625,
+      type: 2}

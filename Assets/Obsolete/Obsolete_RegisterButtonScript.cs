@@ -46,7 +46,7 @@ public class RegisterButtonScript : MonoBehaviour, IPointerClickHandler
                     resultField.text = "注册成功，即将自动登录";
                     this.gameObject.GetComponent<Image>().raycastTarget = false;
                     this.gameObject.GetComponent<Image>().color = Color.green;
-                    LOGIN_SGM_Script._Instance.ShowLoadingUI();
+                    LOGIN_SGM_Script.Instance.ShowLoadingUI();
                 }
                 else
                 {

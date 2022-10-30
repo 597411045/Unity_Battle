@@ -117,18 +117,17 @@ public class ButtonsFunctionScript : MonoBehaviour, IPointerClickHandler
         }
         if (this.gameObject.name.Equals("Register_Button"))
         {
-            Application.OpenURL("http://81.68.87.60/app.publish/Register");
-            //Help.BrowseURL("http://81.68.87.60/app.publish/Register");
-
-            LOGIN_SGM_Script._Instance.OnRegisterButtonClick();
+            LOGIN_SGM_Script.Instance.Notify(EventName.RegisterButton_Click, this);
         }
         if (this.gameObject.name.Equals("Login_Button"))
         {
-            LOGIN_SGM_Script._Instance.OnLoginButtonClick();
+            LOGIN_SGM_Script.Instance.Notify(EventName.LoginButton_Click, this);
+            
+            //LOGIN_SGM_Script.Instance.OnLoginButtonClick();
         }
         if (this.gameObject.name.Equals("Guest_Button"))
         {
-            LOGIN_SGM_Script._Instance.ShowLoadingUI();
+
         }
         if (this.gameObject.name.Equals("SystemButton_1"))
         {
@@ -138,13 +137,11 @@ public class ButtonsFunctionScript : MonoBehaviour, IPointerClickHandler
         {
             PB_SGM_Script._Instance.BackToChooseStage();
         }
-        if (this.gameObject.name.Equals("SystemButton_3")) {
-            Application.Quit(0);
+        if (this.gameObject.name.Equals("SystemButton_3"))
+        {
+
         }
     }
-
-
-
 
     IEnumerator CR_EndBuyButton()
     {

@@ -41,7 +41,7 @@ public class Obsolete_LoginButtonScript : MonoBehaviour, IPointerClickHandler
                 resultField.text = "登录成功，即将跳转";
                 this.gameObject.GetComponent<Image>().raycastTarget = false;
                 this.gameObject.GetComponent<Image>().color = Color.green;
-                LOGIN_SGM_Script._Instance.ShowLoadingUI();
+                LOGIN_SGM_Script.Instance.ShowLoadingUI();
 
             }
             else

@@ -6,6 +6,6 @@ public class MainCamera_AE_Script : MonoBehaviour
 {
     void DoSomething()
     {
-        LOGIN_SGM_Script._Instance.ShowLoginUI();
+        //LOGIN_SGM_Script._Instance.ShowLoginUI();
     }
 }

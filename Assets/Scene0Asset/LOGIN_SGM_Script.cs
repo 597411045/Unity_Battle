@@ -10,26 +10,40 @@ using UnityEngine.UI;
 
 public class LOGIN_SGM_Script : Base_SGM
 {
-    public static LOGIN_SGM_Script _Instance;
+    public static LOGIN_SGM_Script Instance;
+    public static GameObject UserBlock;
 
-    GameObject Welcome_Panel;
-    GameObject Login_Panel;
-    ParticleSystem.MainModule particleSystem;
-    GameObject windZone;
+    public GameObject Welcome_Panel;
+    public GameObject Login_Panel;
+    public ParticleSystem.MainModule particleSystem;
+    public GameObject windZone;
+    public GameObject LoginTitle;
+    public GameObject LoginBackground;
+    public GameObject DialogTMP;
+    public GameObject Register_Button;
+
 
     public AnimationCurve recycleCurve;
     public AnimationCurve fadeCurve;
     public AnimationCurve ascendCurve;
 
+    public bool WelcomeStage;
+    public bool LoginStage;
+    public bool ExitStage;
+
     private void Awake()
     {
-        _Instance = this;
+        Instance = this;
         instance = this;
         base.Base_Awake();
         Welcome_Panel = GameObject.Find("Welcome_Panel");
         Login_Panel = GameObject.Find("Login_Panel");
         particleSystem = GameObject.Find("Particle System").GetComponent<ParticleSystem>().main;
-        windZone = GameObject.Find("WindZone"); ;
+        windZone = GameObject.Find("WindZone");
+        UserBlock = GameObject.Find("UserBlock");
+        LoginTitle = GameObject.Find("LoginTitle");
+        LoginBackground = GameObject.Find("LoginBackground");
+        DialogTMP = GameObject.Find("DialogTMP");
 
         LoginForm = MyUtil.FindTransformInChildren(Login_Panel.transform, "LoginForm").gameObject;
         Register_Button = MyUtil.FindTransformInChildren(Login_Panel.transform, "Register_Button").gameObject;
@@ -38,13 +52,12 @@ public class LOGIN_SGM_Script : Base_SGM
         Password_Text = MyUtil.FindTransformInChildren(Login_Panel.transform, "Password_Text").gameObject.GetComponent<Text>();
         Login_Panel.SetActive(false);
 
-
-
         DialogBox.SetActive(false);
         LoadingBox.SetActive(false);
 
 
         MainCamera.GetComponent<Animation>().Play("CameraAni_1");
+        WelcomeStage = true;
     }
     private void Start()
     {
@@ -54,7 +67,7 @@ public class LOGIN_SGM_Script : Base_SGM
     }
 
     public float timer;
-    bool isTiming;
+    public bool isTiming;
     GameObject LoginForm;
 
     private void Update()
@@ -76,87 +89,28 @@ public class LOGIN_SGM_Script : Base_SGM
         }
     }
 
-    public void PassToLoginStage()
-    {
-        MainCamera.GetComponent<Animation>().Play("CameraAni_2");
-        MyUtil.FindTransformInChildren(Welcome_Panel.transform, "GameTitle").gameObject.GetComponent<Animation>().Play("GameTitle");
-        MyUtil.FindTransformInChildren(Welcome_Panel.transform, "GameTitle").gameObject.GetComponent<UI_BlinkScript>().enabled = true;
-        MyUtil.FindTransformInChildren(Welcome_Panel.transform, "GameTitle").gameObject.GetComponent<UI_BlinkScript>().FadeModeOn();
-        MyUtil.FindTransformInChildren(Welcome_Panel.transform, "PressHint").gameObject.GetComponent<UI_BlinkScript>().FadeModeOn();
-    }
-    public void ShowLoginUI()
-    {
-        Login_Panel.SetActive(true);
-        Welcome_Panel.SetActive(false);
-        MyUtil.FindTransformInChildren(Login_Panel.transform, "LoginTitle").gameObject.GetComponent<UI_BlinkScript>().material.SetColor("_Color", new Color(1, 1, 1, 0));
-        MyUtil.FindTransformInChildren(Login_Panel.transform, "LoginTitle").gameObject.GetComponent<UI_BlinkScript>().AscendModeOn();
-        MyUtil.FindTransformInChildren(Login_Panel.transform, "LoginBackground").gameObject.GetComponent<UI_BlinkScript>().material.SetColor("_Color", new Color(1, 1, 1, 0));
-        MyUtil.FindTransformInChildren(Login_Panel.transform, "LoginBackground").gameObject.GetComponent<UI_BlinkScript>().AscendModeOn();
-        isTiming = true;
-        StartCoroutine(CR_ShowLoginDialog());
-    }
-    IEnumerator CR_ShowLoginDialog()
-    {
-        yield return new WaitForSeconds(1);
-        ShowDialogBox("首先，要完成登录环节。点击<color=red>注册按钮</color>，跳转网页端进行注册。注册成功后，输入信息，进行登录。跳过此环节，可以点击游客登录。", DialogHint.Default);
-    }
-
-    GameObject Register_Button;
-    public void OnRegisterButtonClick()
-    {
-        Register_Button.GetComponentInChildren<Text>().enabled = false;
-        Register_Button.GetComponentInChildren<SpriteRenderer>().enabled = true;
-        Register_Button.GetComponent<Image>().raycastTarget = false;
-        StartCoroutine(CR_ResetRegisterButton());
-    }
-    IEnumerator CR_ResetRegisterButton()
-    {
-        yield return new WaitForSeconds(1);
-        Register_Button.GetComponentInChildren<Text>().enabled = true;
-        Register_Button.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        Register_Button.GetComponent<Image>().raycastTarget = true;
-    }
-
-    GameObject Login_Button;
+    public GameObject Login_Button;
     public Text Name_Text;
     public Text Password_Text;
     public UserInfo userInfo;
     public bool isLoginDone;
     public bool isLoginSuccess;
-    Thread thread_Login;
-    DataSet ds;
-    DataTable dt;
-    string cmdStr;
+    public Thread thread_Login;
+    public DataSet ds;
+    public DataTable dt;
+    public string cmdStr;
     public void OnLoginButtonClick()
     {
-        Login_Button.GetComponentInChildren<Text>().enabled = false;
-        Login_Button.GetComponentInChildren<SpriteRenderer>().enabled = true;
-        Login_Button.GetComponent<Image>().raycastTarget = false;
+        //Login_Button.GetComponentInChildren<Text>().enabled = false;
+        //Login_Button.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        //Login_Button.GetComponent<Image>().raycastTarget = false;
 
 
-        thread_Login = new Thread(GetDataAndSaveData);
-        thread_Login.Start();
-
-    }
-    void GetDataAndSaveData()
-    {
-        ds = new DataSet();
-        cmdStr = "SELECT * FROM `unity`.`tbl_user` WHERE `name`='" + Name_Text.text + "' AND `password`='" + Password_Text.text + "';";
-        int result = MyUtil.GetDataFromMySQL(cmdStr, ds);
-        if (result == 1)
-        {
-            dt = ds.Tables[0];
-            if (dt.Rows.Count == 1)
-            {
-                isLoginSuccess = true;
-            }
-        }
-        isLoginDone = true;
-
-        cmdStr = "UPDATE `unity`.`tbl_user` SET `lastLoginTime` = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' WHERE(`id` = '1');";
-        MyUtil.SaveDataToMySQL(cmdStr);
+        //thread_Login = new Thread(GetDataAndSaveData);
+        //thread_Login.Start();
 
     }
+    
     public void ResetLoginButton(bool flag)
     {
         Login_Button.GetComponentInChildren<Text>().enabled = true;
@@ -215,9 +169,8 @@ public class LOGIN_SGM_Script : Base_SGM
     {
         Login_Panel.SetActive(false);
         LoadingBox.SetActive(true);
-        MyUtil.FindTransformInChildren(LoadingBox.transform, "ExitBlackScreen").gameObject.GetComponent<UI_BlinkScript>().material.SetColor("_Color", new Color(1, 1, 1, 0));
         particleSystem.loop = false;
-        StartCoroutine(CR_ChangeScene());
+        //StartCoroutine(CR_ChangeScene());
     }
 
     IEnumerator CR_ChangeScene()
@@ -225,4 +178,63 @@ public class LOGIN_SGM_Script : Base_SGM
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(1);
     }
+
+    #region PS_TEXT
+    private static Dictionary<string, EventHandler> obs = new Dictionary<string, EventHandler>();
+
+    public void AddObserver(string name, EventHandler h)
+    {
+        if (obs.ContainsKey(name))
+        {
+            obs[name] += (h);
+        }
+        else
+        {
+            obs.Add(name, h);
+        }
+    }
+    public void RemoveObserver(string name, EventHandler h)
+    {
+        if (obs.ContainsKey(name))
+        {
+            obs[name] -= h;
+        }
+    }
+
+    public void Notify(string name, object sender)
+    {
+        if (obs.ContainsKey(name))
+        {
+            obs[name]?.Invoke(sender, EventArgs.Empty);
+        }
+    }
+
+    public void Notify(string name, object sender, EventArgs e)
+    {
+        if (obs.ContainsKey(name))
+        {
+            obs[name]?.Invoke(sender, e);
+        }
+    }
+
+
+    #endregion
+
+    #region Event
+    private event Action OnExit;
+    public void AddListener(Action a)
+    {
+        OnExit += a;
+    }
+    public void RemoveListener(Action a)
+    {
+        OnExit -= a;
+    }
+    public void TriggerEvent()
+    {
+        OnExit();
+    }
+    #endregion
 }
+
+

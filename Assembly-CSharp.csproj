@@ -63,12 +63,20 @@
     <Compile Include="Assets\Base_SGM.cs" />
     <Compile Include="Assets\CurLevelData.cs" />
     <Compile Include="Assets\GameData.cs" />
+    <Compile Include="Assets\MVC_Base_Model.cs" />
+    <Compile Include="Assets\MVC_Test_Controller.cs" />
+    <Compile Include="Assets\MVC_Test_Model.cs" />
+    <Compile Include="Assets\MVC_Test_View.cs" />
     <Compile Include="Assets\MyUtil.cs" />
     <Compile Include="Assets\Obsolete\GitTestScript.cs" />
     <Compile Include="Assets\Obsolete\Obsolete_LoginButtonScript.cs" />
     <Compile Include="Assets\Obsolete\Obsolete_PB_SGM_Script.cs" />
     <Compile Include="Assets\Obsolete\Obsolete_RegisterButtonScript.cs" />
     <Compile Include="Assets\OutlineScript.cs" />
+    <Compile Include="Assets\PS_TEST_Enemy.cs" />
+    <Compile Include="Assets\PS_TEST_IObserver.cs" />
+    <Compile Include="Assets\PS_TEST_ISubject.cs" />
+    <Compile Include="Assets\PS_TEST_PlayerAction.cs" />
     <Compile Include="Assets\SampleInfoScript.cs" />
     <Compile Include="Assets\Scene0Asset\LOGIN_SGM_Script.cs" />
     <Compile Include="Assets\Scene0Asset\MainCamera_AE_Script.cs" />
@@ -94,6 +102,9 @@
     <Compile Include="Assets\Scene2Asset\PlayerActionControlScript.cs" />
     <Compile Include="Assets\Scene2Asset\TakeDamageScript.cs" />
     <Compile Include="Assets\Scene3Asset\SB_SGM_Script.cs" />
+    <Compile Include="Assets\SingleTon.cs" />
+    <Compile Include="Assets\SystemFunctionScript.cs" />
+    <Compile Include="Assets\TestScript.cs" />
     <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
   </ItemGroup>
@@ -363,6 +374,9 @@
     </Reference>
     <Reference Include="ZstdNet">
       <HintPath>Assets\AddsOn\Mysql\ZstdNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Valve.Newtonsoft.Json">
+      <HintPath>Assets\SteamVR\Input\Plugins\JSON.NET\Valve.Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Unsafe">
       <HintPath>Library\PackageCache\com.unity.burst@1.4.11\Unity.Burst.Unsafe.dll</HintPath>
@@ -724,17 +738,29 @@
     <Reference Include="Boo.Lang">
       <HintPath>E:\Unity\Editor\2019.4.29f1c2\Editor\Data\MonoBleedingEdge\lib\mono\unityscript\Boo.Lang.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.XR.Management">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.Management.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
       <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Subsystem.Registration">
+      <HintPath>Library\ScriptAssemblies\Unity.Subsystem.Registration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.OpenVR">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenVR.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.OpenVR.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.OpenVR.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
@@ -754,6 +780,12 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.Management.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.Management.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
@@ -766,8 +798,14 @@
     <Reference Include="Unity.Animation.Rigging.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.SpatialTracking">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.SpatialTracking.dll</HintPath>
+    </Reference>
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpatialTracking">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
@@ -778,6 +816,9 @@
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
@@ -786,6 +827,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="SteamVR_Actions.csproj">
+      <Project>{5232A0BA-91ED-5A22-7038-9F3C90346AC0}</Project>
+      <Name>SteamVR_Actions</Name>
+    </ProjectReference>
+    <ProjectReference Include="SteamVR_Input_Editor.csproj">
+      <Project>{6CD846B0-25D3-F3B1-3806-FB6459DA7B48}</Project>
+      <Name>SteamVR_Input_Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SteamVR_Editor.csproj">
+      <Project>{A8F14A48-45CF-C2C2-594A-9CBB6079B286}</Project>
+      <Name>SteamVR_Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SteamVR.csproj">
+      <Project>{9750C9DE-79BE-C029-7FB7-CBC1818F2EEB}</Project>
+      <Name>SteamVR</Name>
+    </ProjectReference>
+    <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
+      <Project>{BADF778B-C852-7458-88C4-3A1591870D37}</Project>
+      <Name>SteamVR_Windows_EditorHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
