@@ -62,7 +62,9 @@
     <Compile Include="Assets\AddsOn\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
     <Compile Include="Assets\Base_SGM.cs" />
     <Compile Include="Assets\CurLevelData.cs" />
+    <Compile Include="Assets\CustomFallbackCameraController.cs" />
     <Compile Include="Assets\GameData.cs" />
+    <Compile Include="Assets\ImageScript.cs" />
     <Compile Include="Assets\MVC_Base_Model.cs" />
     <Compile Include="Assets\MVC_Test_Controller.cs" />
     <Compile Include="Assets\MVC_Test_Model.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Assets\TestScript.cs" />
     <Compile Include="Assets\Unity\ConstraintSamples\Scripts\mParent.cs" />
     <Compile Include="Assets\Unity\Info\Scripts\Readme.cs" />
+    <Compile Include="Assets\UnityEventScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
