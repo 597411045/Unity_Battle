@@ -117,8 +117,8 @@ namespace Valve.VR.InteractionSystem
 		public static SteamVR_Events.Event< float > ChangeScene = new SteamVR_Events.Event< float >();
 		public static SteamVR_Events.Action< float > ChangeSceneAction( UnityAction< float > action ) { return new SteamVR_Events.Action< float >( ChangeScene, action ); }
 
-		public static SteamVR_Events.Event< TeleportMarkerBase > Player = new SteamVR_Events.Event< TeleportMarkerBase >();
-		public static SteamVR_Events.Action< TeleportMarkerBase > PlayerAction( UnityAction< TeleportMarkerBase > action ) { return new SteamVR_Events.Action< TeleportMarkerBase >( Player, action ); }
+		public static SteamVR_Events.Event< TeleportMarkerBase > PlayerT = new SteamVR_Events.Event< TeleportMarkerBase >();
+		public static SteamVR_Events.Action< TeleportMarkerBase > PlayerAction( UnityAction< TeleportMarkerBase > action ) { return new SteamVR_Events.Action< TeleportMarkerBase >( PlayerT, action ); }
 
 		public static SteamVR_Events.Event< TeleportMarkerBase > PlayerPre = new SteamVR_Events.Event< TeleportMarkerBase >();
 		public static SteamVR_Events.Action< TeleportMarkerBase > PlayerPreAction( UnityAction< TeleportMarkerBase > action ) { return new SteamVR_Events.Action< TeleportMarkerBase >( PlayerPre, action ); }
@@ -233,7 +233,7 @@ namespace Valve.VR.InteractionSystem
 			}
 		}
 
-
+		public Vector3 targetPosition;
 		//-------------------------------------------------
 		void Update()
 		{
@@ -248,7 +248,10 @@ namespace Valve.VR.InteractionSystem
 					{
 						if ( pointerHand == hand ) //This is the pointer hand
 						{
+							Debug.Log("Try Teleport");
 							TryTeleportPlayer();
+
+
 						}
 					}
 				}
@@ -256,6 +259,8 @@ namespace Valve.VR.InteractionSystem
 				if ( WasTeleportButtonPressed( hand ) )
 				{
 					newPointerHand = hand;
+					Debug.Log("Button Pressed");
+
 				}
 			}
 
@@ -269,6 +274,7 @@ namespace Valve.VR.InteractionSystem
 				if ( !visible && newPointerHand != null )
 				{
 					//Begin showing the pointer
+					Debug.Log("Show Pointer");
 					ShowPointer( newPointerHand, oldPointerHand );
 				}
 				else if ( visible )
@@ -906,7 +912,7 @@ namespace Valve.VR.InteractionSystem
 				teleportingToMarker.TeleportPlayer( pointedAtPosition );
 			}
 
-			Teleport.Player.Send( pointedAtTeleportMarker );
+			Teleport.PlayerT.Send( pointedAtTeleportMarker );
 		}
 
 
@@ -925,7 +931,7 @@ namespace Valve.VR.InteractionSystem
 					hitTeleportMarker.Highlight( true );
 
 					prevPointedAtPosition = pointedAtPosition;
-					PlayPointerHaptic( !hitTeleportMarker.locked );
+					//PlayPointerHaptic( !hitTeleportMarker.locked );
 
 					PlayAudioClip( reticleAudioSource, goodHighlightSound );
 

@@ -42,14 +42,14 @@ namespace Valve.VR.InteractionSystem
             }
 
             float up = 0.0f;
-            if (Input.GetKey(KeyCode.E))
-            {
-                up += 1.0f;
-            }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                up -= 1.0f;
-            }
+            //if (Input.GetKey(KeyCode.E))
+            //{
+            //    up += 1.0f;
+            //}
+            //if (Input.GetKey(KeyCode.Q))
+            //{
+            //    up -= 1.0f;
+            //}
 
             float right = 0.0f;
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
