@@ -74,7 +74,6 @@ namespace Valve.VR.InteractionSystem
             Vector3 delta = new Vector3(right, up, forward) * currentSpeed * deltaRealTime;
 
             //transform.position += transform.TransformDirection(delta);
-            Player.instance.GetComponent<Rigidbody>().velocity = transform.TransformDirection(delta * 50);
 
             Vector3 mousePosition = Input.mousePosition;
 
@@ -89,6 +88,10 @@ namespace Valve.VR.InteractionSystem
             //	Vector3 offset = mousePosition - startMousePosition;
             //	transform.localEulerAngles = startEulerAngles + new Vector3( -offset.y * 360.0f / Screen.height, offset.x * 360.0f / Screen.width, 0.0f );
             //}
+
+            Player.instance.GetComponent<Rigidbody>().velocity = this.transform.parent.rotation * new Vector3(Input.GetAxis("Horizontal") * 5, 0, Input.GetAxis("Vertical") * 5);
+
+
 
             this.transform.parent.rotation = this.transform.parent.rotation * Quaternion.AngleAxis(Input.GetAxis("Mouse X"), Vector3.up);
             this.transform.rotation = this.transform.rotation * Quaternion.AngleAxis(Input.GetAxis("Mouse Y"), Vector3.left);

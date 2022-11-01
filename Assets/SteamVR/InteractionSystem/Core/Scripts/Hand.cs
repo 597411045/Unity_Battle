@@ -165,6 +165,7 @@ namespace Valve.VR.InteractionSystem
             get { return _hoveringInteractable; }
             set
             {
+                Debug.Log("hoveringInteractable set");
                 if (_hoveringInteractable != value)
                 {
                     if (_hoveringInteractable != null)
@@ -569,7 +570,7 @@ namespace Valve.VR.InteractionSystem
             attachedObjects.Add(attachedObject);
 
             UpdateHovering();
-
+            Debug.Log("AttachObject UpdateHovering();");
             if (spewDebugText)
                 HandDebugLog("AttachObject " + objectToAttach);
             objectToAttach.SendMessage("OnAttachedToHand", this, SendMessageOptions.DontRequireReceiver);
@@ -886,6 +887,7 @@ namespace Valve.VR.InteractionSystem
 
             // Hover on this one
             hoveringInteractable = closestInteractable;
+            Debug.Log("hoveringInteractable = closestInteractable");
         }
 
         protected virtual bool CheckHoveringForTransform(Vector3 hoverPosition, float hoverRadius, ref float closestDistance, ref Interactable closestInteractable, Color debugColor)
@@ -982,7 +984,8 @@ namespace Valve.VR.InteractionSystem
         //-------------------------------------------------
         protected virtual void UpdateNoSteamVRFallback()
         {
-            if (noSteamVRFallbackCamera)
+            if (false)
+            //if (noSteamVRFallbackCamera)
             {
                 Ray ray = noSteamVRFallbackCamera.ScreenPointToRay(Input.mousePosition);
 
@@ -1021,6 +1024,15 @@ namespace Valve.VR.InteractionSystem
                         transform.position = oldPosition;
                     }
                 }
+            }
+
+            if (Input.GetKey(KeyCode.Q))
+            {
+                this.transform.position += Vector3.up * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                this.transform.position += Vector3.down * Time.deltaTime;
             }
         }
 
@@ -1105,11 +1117,14 @@ namespace Valve.VR.InteractionSystem
             if (attachedObject != null)
             {
                 attachedObject.SendMessage("HandAttachedUpdate", this, SendMessageOptions.DontRequireReceiver);
+                Debug.Log("HandAttachedUpdate");
             }
 
             if (hoveringInteractable)
             {
                 hoveringInteractable.SendMessage("HandHoverUpdate", this, SendMessageOptions.DontRequireReceiver);
+                Debug.Log("HandHoverUpdate");
+
             }
         }
 
@@ -1346,6 +1361,8 @@ namespace Valve.VR.InteractionSystem
                 DetachObject(applicationLostFocusObject, true);
                 applicationLostFocusObject.SetActive(false);
                 UpdateHovering();
+                Debug.Log("OnInputFocus UpdateHovering();");
+
                 BroadcastMessage("OnParentHandInputFocusAcquired", SendMessageOptions.DontRequireReceiver);
             }
             else
