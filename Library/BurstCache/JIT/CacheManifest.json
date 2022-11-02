@@ -30,7 +30,7 @@
     {
       "FullName": "System.Int32 Unity.Burst.Intrinsics.X86::DoGetCSRTrampoline()",
       "ModuleOptionsHash": 11834165633931345063,
-      "ModuleHash": "79921aea1f90faa9cbbb3f9d09e1f66f",
+      "ModuleHash": "873716bdc8d5f909af193bccb151b51a",
       "LinkName": "CDCA4A5193BE5947",
       "AssemblyDependencyIndices": [
         0,
@@ -40,7 +40,7 @@
     {
       "FullName": "System.Void Unity.Burst.Intrinsics.X86::DoSetCSRTrampoline(System.Int32)",
       "ModuleOptionsHash": 11834165633931345063,
-      "ModuleHash": "1f92f6ce5d647a56c0939648a0746e65",
+      "ModuleHash": "554040c1789d83151639960b584cacf9",
       "LinkName": "801E9A000BB37B05",
       "AssemblyDependencyIndices": [
         0,
