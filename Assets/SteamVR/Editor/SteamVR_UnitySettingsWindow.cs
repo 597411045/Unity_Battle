@@ -116,7 +116,7 @@ namespace Valve.VR
 #endif
             forceShow;
 
-            if (show)
+            if (false)
             {
                 window = GetWindow<SteamVR_UnitySettingsWindow>(true);
                 window.minSize = new Vector2(320, 440);
